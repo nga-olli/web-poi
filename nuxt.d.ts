@@ -1,9 +1,9 @@
-import Vue, { ComponentOptions } from 'vue';
-import { Store } from 'vuex';
-import { Route } from 'vue-router';
-import { AxiosInstance, AxiosRequestConfig } from 'axios';
+import Vue, { ComponentOptions } from "vue";
+import { Store } from "vuex";
+import { Route } from "vue-router";
+import { AxiosInstance, AxiosRequestConfig } from "axios";
 
-declare module 'nuxt' {
+declare module "nuxt" {
   interface NuxtAxiosInstance {
     $post(url: string, data?: any, config?: AxiosRequestConfig): Promise<any>;
   }

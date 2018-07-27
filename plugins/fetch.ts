@@ -1,13 +1,13 @@
-export default function ({ store, app: { $axios, redirect } }) {
+export default function({ store, app: { $axios, redirect } }) {
   $axios.onRequest(config => {
     if (store.getters.loggedToken !== null) {
       config.headers = {
-        Authorization: 'Bearer ' + store.getters.loggedToken
-      }
+        Authorization: "Bearer " + store.getters.loggedToken
+      };
     }
 
     return config;
-  })
+  });
 
   $axios.onResponse(response => {
     // if (typeof response.errors !== 'undefined') {
@@ -17,15 +17,14 @@ export default function ({ store, app: { $axios, redirect } }) {
     //     type: 'error',
     //     duration: 2 * 1000
     //   })
-
     // } else {
     //   return response;
     // }
-  })
+  });
 
   $axios.onError(error => {
-    console.log('--- FETCH ERROR ---:');
+    console.log("--- FETCH ERROR ---:");
     console.dir(error);
     return;
-  })
+  });
 }

@@ -4,7 +4,7 @@
       @click="handlePageChange(previousPage)">
       Previous
     </el-button>
-    <span class="text">{{ $t('default.page') }} {{ currentPage }} / {{ totalPage }}</span>
+    <span class="text">Page {{ currentPage }} / {{ totalPage }}</span>
     <el-button type="text" :disabled="nextPage > totalPage"
       @click="handlePageChange(nextPage)">
       Next &nbsp;

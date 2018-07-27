@@ -12,7 +12,7 @@
       </i>
     </el-input>
     <el-tooltip class="item" effect="dark" content="Click to enable go to page feature" placement="top">
-      <span class="text" v-show="!showGoto" @click="onToggle">{{ $t('default.page') }} {{ currentPage }} / {{ totalPage }}</span>
+      <span class="text" v-show="!showGoto" @click="onToggle">Page {{ currentPage }} / {{ totalPage }}</span>
     </el-tooltip>
     <el-button type="text" :disabled="nextPage > totalPage"
       @click="handlePageChange(nextPage)">

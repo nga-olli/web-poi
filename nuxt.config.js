@@ -57,7 +57,8 @@ module.exports = {
       'vuex-class',
       'nuxt-class-component',
       'nuxt-property-decorator',
-      'vue-class-component'
+      'vue-class-component',
+      '@johmun/vue-tags-input'
     ],
     extend(config, ctx) {
       if (!ctx.isDev) {
@@ -74,7 +75,8 @@ module.exports = {
     { src: '~plugins/elementui.ts' },
     { src: '~plugins/fetch.ts' },
     { src: '~plugins/scrolltop.ts' },
-    { src: '~plugins/notifications.ts' }
+    { src: '~plugins/notifications.ts' },
+    { src: '~plugins/tags-input.ts' },
   ],
   axios: {
     baseURL: process.env.GRAPHQL_ENDPOINT,
