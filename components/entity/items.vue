@@ -2,7 +2,11 @@
   <section>
     <el-table :data="entities" style="width: 100%" row-key="id">
       <el-table-column label="Name" width="250"
-        :show-overflow-tooltip="true">
+        :show-overflow-tooltip="true" :default-sort = "{order: 'descending'}" >
+        <el-tooltip placement="top">
+          <div slot="content">multiple lines<br/>second line</div>
+          <el-button>Top center</el-button>
+        </el-tooltip>
         <template slot-scope="scope">
           {{ scope.row.name }}
         </template>
