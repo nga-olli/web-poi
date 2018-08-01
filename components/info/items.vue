@@ -29,7 +29,7 @@
       </el-table-column>
       <el-table-column label="Type" align="center" width="200">
         <template slot-scope="scope">
-          <select-type :currentType="scope.row.type"></select-type>
+          <select-type :currentType="scope.row.type" :info="scope.row"></select-type>
         </template>
       </el-table-column>
       <el-table-column label="Number" width="100" align="center">

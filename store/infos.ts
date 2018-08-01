@@ -8,11 +8,15 @@ export const state = () => ({
 
 export const mutations = {
   SET_DATA(state, response) {
-    state.data = response.getPoiInfos.items || null;
-    state.totalItems = response.getPoiInfos.meta.totalResults || 0;
-    state.recordPerPage = response.getPoiInfos.meta.perPage || 30;
-    state.query.page = response.getPoiInfos.meta.curPage || 1;
-  }
+    state.data = response.items || null;
+    state.totalItems = response.meta.totalResults || 0;
+    state.recordPerPage = response.meta.perPage || 30;
+    state.query.page = response.meta.curPage || 1;
+  },
+  UPDATE_DATA(state, response) {
+    const index = state.data.findIndex(item => item.id === response.id);
+    state.data.splice(index, 1, response);
+  },
 };
 
 export const actions = {
@@ -55,6 +59,44 @@ export const actions = {
       }`
     });
 
-    return typeof response.errors === "undefined" ? commit("SET_DATA", response.data) : response.errors;
+    return typeof response.errors === "undefined" ? commit("SET_DATA", response.data.getPoiInfos) : response.errors;
+  },
+
+  async change_type({ commit }, { id, typeId }) {
+    const response = await this.$axios.$post("/", { query: `
+        mutation changePoiType(
+          $id: Int!,
+          $typeId: Int!
+        ) {
+          changePoiType(
+            id: $id,
+            typeId: $typeId
+          ) {
+            type { id, name },
+            id,
+            name,
+            similar,
+            number,
+            street,
+            ward { id, name},
+            district { id, name},
+            city { id, name},
+            lat,
+            lng,
+            website,
+            phoneNumber,
+            rating,
+            ggFullAddress,
+            dateCreated
+          }
+        }
+      `,
+      variables: {
+        id: parseInt(id),
+        typeId: parseInt(typeId)
+      }
+    });
+
+    return typeof response.errors === "undefined" ? commit("UPDATE_DATA", response.data.changePoiType) : response.errors;
   }
 };

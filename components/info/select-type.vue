@@ -1,11 +1,12 @@
 <template>
   <div class="select-type-container">
-    <el-select v-model="selected" filterable placeholder="Select type">
+    <el-select v-model="selected" filterable placeholder="Select type" @change="onChange()">
       <el-option
         v-for="(item, index) in options"
         :key="index"
         :label="item.name"
-        :value="item.id">
+        :value="item.id"
+      >
         <span class="type-name">{{ item.name }}</span>
         <span class="type-similar">{{ _truncate(item.similar.join(', ')) }}</span>
       </el-option>
@@ -21,10 +22,22 @@ import * as truncate from 'truncate';
 @Component
 export default class SelectType extends Vue {
   @State(state => state.entities.data) options;
+  @Action('infos/change_type') changeTypeAction;
   @Prop() currentType;
+  @Prop() info;
+
 
   loading: boolean = false;
   selected: any = null;
+
+  async onChange() {
+    this.loading = true;
+    await this.changeTypeAction({
+      id: this.info.id,
+      typeId: this.selected
+    })
+    this.loading = false;
+  }
 
   created() {
     if (this.currentType !== null) {
