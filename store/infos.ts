@@ -16,7 +16,7 @@ export const mutations = {
   UPDATE_DATA(state, response) {
     const index = state.data.findIndex(item => item.id === response.id);
     state.data.splice(index, 1, response);
-  },
+  }
 };
 
 export const actions = {
@@ -63,7 +63,8 @@ export const actions = {
   },
 
   async change_type({ commit }, { id, typeId }) {
-    const response = await this.$axios.$post("/", { query: `
+    const response = await this.$axios.$post("/", {
+      query: `
         mutation changePoiType(
           $id: Int!,
           $typeId: Int!
@@ -97,6 +98,8 @@ export const actions = {
       }
     });
 
-    return typeof response.errors === "undefined" ? commit("UPDATE_DATA", response.data.changePoiType) : response.errors;
+    return typeof response.errors === "undefined"
+      ? commit("UPDATE_DATA", response.data.changePoiType)
+      : response.errors;
   }
 };

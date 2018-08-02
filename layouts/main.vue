@@ -17,13 +17,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import Navigation from '~/components/navigation.vue'
 import Sidebar  from '~/components/sidebar.vue'
 
 
 @Component({
   components: {
-    Navigation,
     Sidebar
   }
 })

@@ -2,18 +2,14 @@
     <el-aside class="el-col-3">
       <el-col :span="24"><div class="logo"><img src="/img/logo-olli.png" width="40"></div></el-col>
        <el-col :span="24">
-        <el-menu expand-trigger="hover" @open="handleOpen" @close="handleClose" :collapse="isCollapse" >
+        <el-menu expand-trigger="hover" unique-opened :default-active="$route.path" router :collapse="isCollapse">
           <template>
-             <el-menu-item index="1"> <i class="el-icon-fa el-icon-fa-home"> </i> Home</el-menu-item>
-              <el-submenu index="2" >
-              <span slot="title"> <i class="el-icon-fa el-icon-fa-exchange"> </i> Exchange</span>
-              <el-menu-item index="2-1">item one</el-menu-item>
-              <el-menu-item index="2-2">item one</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="3"> <i class="el-icon-document"> </i> Orders</el-menu-item>
-            <el-menu-item index="4"> <i class="el-icon-fa el-icon-fa-user-circle-o"> </i> Accounts</el-menu-item>
-            <el-menu-item index="5"> <i class="el-icon-setting"> </i> Settings</el-menu-item>
-            <el-menu-item index="6"> <i class="el-icon-fa el-icon-fa-commenting-o"> </i> Support</el-menu-item>
+            <el-menu-item index="/">
+              <i class="el-icon-fa-bank"></i> Types
+            </el-menu-item>
+            <el-menu-item index="/info">
+              <i class="el-icon-fa-map-marker"></i> Infomation
+            </el-menu-item>
           </template>
         </el-menu>
       </el-col>
@@ -26,14 +22,6 @@ import { Vue, Component } from "nuxt-property-decorator";
 @Component
 export default class Sidebar extends Vue {
   isCollapse: boolean = true;
-
-  handleOpen(key, keyPath) {
-    console.log(key, keyPath);
-  }
-
-  handleClose(key, keyPath) {
-    console.log(key, keyPath);
-  }
 }
 </script>
 

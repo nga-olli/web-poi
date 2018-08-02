@@ -25,14 +25,14 @@ export const mutations = {
 
 export const actions = {
   async get_all({ commit }, { query }) {
-    const response = await this.$axios.$post('/', {
+    const response = await this.$axios.$post("/", {
       query: `{
         getPoiTypes(
           opts: {
-            curPage: ${typeof query.page !== 'undefined' ? query.page : 1},
-            perPage: ${typeof query.limit !== 'undefined' ? query.limit : 30},
-            q: "${typeof query.q !== 'undefined' ? query.q : ''}",
-            sort: "${typeof query.sort !== 'undefined' ? query.sort : '-id'}"
+            curPage: ${typeof query.page !== "undefined" ? query.page : 1},
+            perPage: ${typeof query.limit !== "undefined" ? query.limit : 30},
+            q: "${typeof query.q !== "undefined" ? query.q : ""}",
+            sort: "${typeof query.sort !== "undefined" ? query.sort : "-id"}"
           }
           ) {
           items {
@@ -51,16 +51,18 @@ export const actions = {
       }`
     });
 
-    return typeof response.errors === 'undefined' ? commit('SET_DATA', response.data) : response.errors;
+    return typeof response.errors === "undefined" ? commit("SET_DATA", response.data) : response.errors;
   },
 
   async update_similar({ commit }, { id, similar }) {
     let similarArr = [];
     await Promise.all(
-      similar.map(item => { similarArr.push(item.text); })
+      similar.map(item => {
+        similarArr.push(item.text);
+      })
     );
 
-    const response = await this.$axios.$post('/', {
+    const response = await this.$axios.$post("/", {
       query: `
         mutation updatePoiTypeSimilar(
           $id: Int!,
@@ -80,16 +82,16 @@ export const actions = {
       variables: {
         id: id,
         input: {
-          similar: similarArr.join(',')
+          similar: similarArr.join(",")
         }
       }
     });
 
-    return typeof response.errors === 'undefined' ? commit('UPDATE_SIMILAR', response.data) : response.errors;
+    return typeof response.errors === "undefined" ? commit("UPDATE_SIMILAR", response.data) : response.errors;
   },
 
   async remove_similar_item({ commit }, { id, similarItem }) {
-    const response = await this.$axios.$post('/', {
+    const response = await this.$axios.$post("/", {
       query: `
         mutation removePoiTypeSimilarItem(
           $id: Int!,
@@ -114,6 +116,6 @@ export const actions = {
       }
     });
 
-    return typeof response.errors === 'undefined' ? commit('REMOVE_SIMILAR_ITEM', response.data) : response.errors;
+    return typeof response.errors === "undefined" ? commit("REMOVE_SIMILAR_ITEM", response.data) : response.errors;
   }
 };
