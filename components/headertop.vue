@@ -58,7 +58,7 @@ export default class HeaderTop extends Vue {
       border: 1px solid #ddd;
       padding-left: 14px;
       padding-right: 36px;
-      height: 32px;
+      height: 32px;        
       border-radius: 16px;
       color: #666;
       opacity: .5;
