@@ -6,7 +6,7 @@
       v-model="visible">
       <div class="tagPopover">
         <vue-tags-input
-          placeholder="Type similar name"
+          placeholder="Click here to add more"
           v-model="tag"
           :allow-edit-tags="true"
           :separators="[';', ',']"
@@ -39,12 +39,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
+import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator';
+import { Action } from 'vuex-class';
 
 @Component
 export default class AddTagButton extends Vue {
   @Prop() id: number;
   @Prop() store: string;
+  @Action('entities/update_similar') updateSimilarAction;
 
   loading: boolean = false;
   visible: boolean = false;
@@ -56,7 +58,7 @@ export default class AddTagButton extends Vue {
   async onConfirm() {
     this.loading = true;
 
-    await this.$store.dispatch('entities/update_similar', {
+    await this.updateSimilarAction({
       id: this.id,
       similar: this.tags
     });

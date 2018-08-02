@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="del-button-container">
     <el-popover ref="myPopover" placement="left" v-model="visible">
       <p style="text-align: center">Are you sure?</p>
       <div style="text-align: center; margin: 0">
@@ -49,6 +49,9 @@ export default class DeleteButton extends Vue {
 </script>
 
 <style scoped>
+.del-button-container {
+  display: inline-block;
+}
 .del-button {
   color: #f56c6c;
 }

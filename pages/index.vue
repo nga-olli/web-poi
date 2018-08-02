@@ -60,7 +60,6 @@ import HeaderTop from '~/components/headertop.vue';
 })
 export default class MainPage extends Vue {
   @Action('entities/get_all') listAction;
-  @State(state => state.authUser) loggedUser;
   @State(state => state.entities.data) entities;
   @State(state => state.entities.totalItems) totalItems;
   @State(state => state.entities.recordPerPage) recordPerPage;

@@ -19,21 +19,20 @@
             :key="key"
             closable
             class="similar-item"
-            type="success">
+            type="success"
+            @close="onRemove(scope.row.id, item)">
             {{ item }}
           </el-tag>
           <add-tag-button :id="scope.row.id"></add-tag-button>
         </template>
       </el-table-column>
-      <el-table-column width="100">
-        <template slot-scope="scope">
-          <small>{{ scope.row.dateCreated.readable }}</small>
-        </template>
-      </el-table-column>
 
-      <el-table-column width="70">
+      <el-table-column width="150">
         <template slot-scope="scope">
           <el-button-group>
+            <el-tooltip class="item" effect="dark" content="Erase similar" placement="top" :enterable="false">
+              <el-button icon="el-icon-fa-eraser" size="mini"></el-button>
+            </el-tooltip>
             <delete-button :id="scope.row.id" store="users"></delete-button>
           </el-button-group>
         </template>
@@ -57,8 +56,22 @@ import AddTagButton from "~/components/entity/addtag-button.vue";
 })
 export default class AdminUserItems extends Vue {
   @Prop() entities: any[];
+  @Action('entities/remove_similar_item') removeSimilarItemAction;
 
-  itemId: number = 0;
+  loading: boolean = false;
+
+  async onRemove(id, item) {
+    this.loading = true;
+
+    await this.removeSimilarItemAction({
+      id: id,
+      similarItem: item
+    });
+
+    this.loading = false;
+
+    return;
+  }
 }
 </script>
 

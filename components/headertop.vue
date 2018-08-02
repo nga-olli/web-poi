@@ -1,13 +1,13 @@
 <template>
   <div class="header el-col-24">
-    <div class="el-search el-col-20">
+    <!-- <div class="el-search el-col-20">
       <div class="box-search">
         <input type="text" class="searchTerm" placeholder="Search...">
           <button type="submit" class="searchButton">
             <i class="el-icon-search"></i>
         </button>
       </div>
-    </div>
+    </div> -->
   <div class="el-account el-col-4"></div>
       <div class="avatar-container" tabindex="0">
         <el-dropdown>
