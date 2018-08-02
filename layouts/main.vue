@@ -6,7 +6,8 @@
       </el-col>
     </el-row> -->
     <el-row class="container">
-      <el-col :span="24">
+      <sidebar></sidebar>
+      <el-col :span="21">
         <nuxt></nuxt>
       </el-col>
     </el-row>
@@ -17,10 +18,13 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import Navigation from '~/components/navigation.vue'
+import Sidebar  from '~/components/sidebar.vue'
+
 
 @Component({
   components: {
-    Navigation
+    Navigation,
+    Sidebar
   }
 })
 export default class MainLayout extends Vue {}
@@ -40,5 +44,32 @@ body {
   font-weight: 500;
   font-size: 0.95rem;
 }
+
+.container.el-row {
+    display: flex;
+    display: -webkit-flex;
+  }
+  .panel-body {
+    padding: 20px;
+    min-height: 100vh;
+    max-height: 100%;
+    background: #fff;
+
+    .no-content {
+      display: block;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      color: #8f8f8f;
+      text-align: center;
+      i {
+        &:before {
+          font-size: 80px;
+        }
+      }
+    }
+
+  }
+
 
 </style>
