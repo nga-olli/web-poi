@@ -10,7 +10,7 @@ export const mutations = {
   SET_DATA(state, response) {
     state.data = response.getPoiTypes.items || null;
     state.totalItems = response.getPoiTypes.meta.totalResults || 0;
-    state.recordPerPage = response.getPoiTypes.meta.perPage || 30;
+    state.recordPerPage = response.getPoiTypes.meta.perPage || 20;
     state.query.page = response.getPoiTypes.meta.curPage || 1;
   },
   UPDATE_SIMILAR(state, response) {
@@ -27,10 +27,10 @@ export const actions = {
   async get_all({ commit }, { query }) {
     const response = await this.$axios.$post("/", {
       query: `{
-        getPoiTypes(
+        getPoiTypes (
           opts: {
             curPage: ${typeof query.page !== "undefined" ? query.page : 1},
-            perPage: ${typeof query.limit !== "undefined" ? query.limit : 30},
+            perPage: ${typeof query.limit !== "undefined" ? query.limit : 20},
             q: "${typeof query.q !== "undefined" ? query.q : ""}",
             sort: "${typeof query.sort !== "undefined" ? query.sort : "-id"}"
           }
@@ -64,7 +64,7 @@ export const actions = {
 
     const response = await this.$axios.$post("/", {
       query: `
-        mutation updatePoiTypeSimilar(
+        mutation (
           $id: Int!,
           $input: JSON!
         ) {
@@ -93,7 +93,7 @@ export const actions = {
   async remove_similar_item({ commit }, { id, similarItem }) {
     const response = await this.$axios.$post("/", {
       query: `
-        mutation removePoiTypeSimilarItem(
+        mutation (
           $id: Int!,
           $input: JSON!
         ) {

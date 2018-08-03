@@ -15,9 +15,8 @@
         </div>
         <el-button type="text" icon="el-icon-plus">Add entity</el-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
-        <div class="el-limit-filter ">
-
-          <el-select v-model="value8" filterable placeholder="Select limit">
+        <div class="el-limit-filter">
+          <el-select v-model="value8">
           <el-option
             v-for="item in options"
             :key="item.value"

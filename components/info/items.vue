@@ -89,7 +89,9 @@
         </template>
       </el-table-column>
     </el-table>
-    <scroll-top :duration="1000" :timing="'ease'"></scroll-top>
+    <no-ssr>
+      <scroll-top :duration="1000" :timing="'ease'"></scroll-top>
+    </no-ssr>
   </section>
 </template>
 

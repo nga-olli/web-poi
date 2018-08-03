@@ -1,14 +1,18 @@
 <template>
-  <el-row>
+  <el-row class="main-content">
+    <header-top></header-top>
     <el-col :span="24">
       <div style="text-align: right;">
-        <el-button type="text" icon="el-icon-plus">Add POI</el-button>
+        <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
     </el-col>
     <el-col :span="24">
       <div class="panel-body">
         <info-items :infos="infos"></info-items>
+      </div>
+      <div class="pagination-bottom">
+        <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
     </el-col>
   </el-row>
@@ -19,13 +23,17 @@ import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { Action, State } from 'vuex-class';
 import Pagination from '~/components/pagination.vue';
 import InfoItems from '~/components/info/items.vue';
+import ImportButton from '~/components/info/import.vue';
+import HeaderTop from '~/components/headertop.vue';
 
 @Component({
   layout: 'main',
   middleware: ['authenticated'],
   components: {
+    HeaderTop,
     Pagination,
-    InfoItems
+    InfoItems,
+    ImportButton
   }
 })
 export default class PoiInfoPage extends Vue {
@@ -67,5 +75,6 @@ export default class PoiInfoPage extends Vue {
 }
 </script>
 
-<style scoped>
+<style>
+
 </style>

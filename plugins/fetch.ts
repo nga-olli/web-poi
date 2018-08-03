@@ -23,8 +23,7 @@ export default function({ store, app: { $axios, redirect } }) {
   });
 
   $axios.onError(error => {
-    console.log("--- FETCH ERROR ---:");
-    console.dir(error);
-    return;
+    console.log('____ FETCH_ERROR ____')
+    throw error;
   });
 }
