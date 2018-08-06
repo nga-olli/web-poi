@@ -113,7 +113,7 @@ export const actions = {
       formData.map(async file => {
         const o = {
           query: `mutation ($file: Upload!) {
-            uploadOctoparse (file: $file) { id }
+            uploadOctoparse (file: $file)
           }`,
           variables: {
             file: null

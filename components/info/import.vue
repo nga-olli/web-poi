@@ -24,12 +24,23 @@
 import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { Action, State } from 'vuex-class';
 
-@Component
+@Component({
+  notifications: {
+    importSuccess: {
+      icon: 'fas fa-exclamation-triangle',
+      position: 'bottomCenter',
+      title: 'Upload success',
+      toastOnce: true,
+      type: 'success'
+    }
+  }
+})
 export default class ImportButton extends Vue {
   @Action('infos/import_octoparse') importAction;
 
   loading: boolean = false;
   myFiles: any[] = [];
+  importSuccess: ({ message: string }) => void;
 
   onChange(file, filelist) {
     this.myFiles = filelist;
@@ -43,9 +54,12 @@ export default class ImportButton extends Vue {
     try {
       this.loading = true;
       await this.importAction({ formData: this.myFiles });
+      this.importSuccess({ message: 'File upload OK, ready in queue.' });
+      this.myFiles = [];
       this.loading = false;
     } catch (error) {
       this.loading = false;
+      this.myFiles = [];
     }
   }
 }
