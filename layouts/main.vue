@@ -151,9 +151,9 @@ body {
   word-break: normal;
 }
 .el-footer {
-  background-color: #4c9cef;
-  color: #fff;
-  text-align: center;
+  background-color: #6ba0d824;
+  color: #00000096;
+  text-align: right;
   .copyright {
     line-height: 40px;
   }
