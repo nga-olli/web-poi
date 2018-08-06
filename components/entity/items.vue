@@ -27,7 +27,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="150">
+      <!-- <el-table-column width="150">
         <template slot-scope="scope">
           <el-button-group>
             <el-tooltip class="item" effect="dark" content="Erase similar" placement="top" :enterable="false">
@@ -36,9 +36,11 @@
             <delete-button :id="scope.row.id" store="users"></delete-button>
           </el-button-group>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
-    <scroll-top :duration="1000" :timing="'ease'"></scroll-top>
+    <no-ssr>
+      <scroll-top :duration="1000" :timing="'ease'"></scroll-top>
+    </no-ssr>
   </section>
 </template>
 

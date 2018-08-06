@@ -3,14 +3,7 @@
     <header-top></header-top>
     <el-col :span="24">
       <div style="text-align: right;">
-        <div class="el-search el-col-5">
-          <div class="panelbody-box-search">
-            <el-input type="text" size="small" placeholder="Search...">
-               <template slot="prepend"><i class="el-icon-search"></i></template>
-            </el-input>
-          </div>
-        </div>
-        <el-button type="text" icon="el-icon-plus">Add entity</el-button>
+        <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
         <div class="el-limit-filter ">
           <el-select v-model="value8" filterable placeholder="Select limit">
@@ -29,10 +22,11 @@
       <div class="panel-body">
         <info-items :infos="infos"></info-items>
       </div>
-    </el-col>
-    <div class="pagination-bottom">
+      <div class="pagination-bottom">
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
-    </div>
+      </div>
+    </el-col>
+    
 
 
   </el-row>
@@ -43,16 +37,19 @@ import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import { Action, State } from 'vuex-class';
 import Pagination from '~/components/pagination.vue';
 import InfoItems from '~/components/info/items.vue';
-import HeaderTop from "~/components/headertop.vue";
+import ImportButton from '~/components/info/import.vue';
+import HeaderTop from '~/components/headertop.vue';
 
 
 @Component({
   layout: 'main',
   middleware: ['authenticated'],
   components: {
+    HeaderTop,
     Pagination,
     InfoItems,
-    HeaderTop
+    ImportButton
+
   }
 })
 export default class PoiInfoPage extends Vue {
@@ -121,9 +118,12 @@ export default class PoiInfoPage extends Vue {
 }
 </script>
 
+
 <style lang="scss" scoped>
 
 </style>
+
+
 
 <style lang="scss">
 .el-table__body, .el-table__footer, .el-table__header {

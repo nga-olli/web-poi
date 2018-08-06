@@ -1,3 +1,5 @@
+import FormData from 'form-data';
+
 export const state = () => ({
   data: [],
   query: {},
@@ -23,7 +25,7 @@ export const actions = {
   async get_all({ commit }, { query }) {
     const response = await this.$axios.$post("/", {
       query: `{
-        getPoiInfos(
+        getPoiInfos (
           opts: {
           curPage: ${typeof query.page !== "undefined" ? query.page : 1},
           perPage: ${typeof query.limit !== "undefined" ? query.limit : 30},
@@ -65,7 +67,7 @@ export const actions = {
   async change_type({ commit }, { id, typeId }) {
     const response = await this.$axios.$post("/", {
       query: `
-        mutation changePoiType(
+        mutation (
           $id: Int!,
           $typeId: Int!
         ) {
@@ -101,5 +103,36 @@ export const actions = {
     return typeof response.errors === "undefined"
       ? commit("UPDATE_DATA", response.data.changePoiType)
       : response.errors;
+  },
+
+  async import_octoparse({ commit }, { formData }) {
+    return await Promise.all(
+      formData.map(async file => {
+        const o = {
+          query: `mutation ($file: Upload!) {
+            uploadOctoparse (file: $file)
+          }`,
+          variables: {
+            file: null
+          }
+        }
+
+        const map = {
+          '0': ['variables.file']
+        }
+
+        let fd = new FormData();
+        fd.append('operations', JSON.stringify(o))
+        fd.append('map', JSON.stringify(map))
+        fd.append(0, file.raw, file.raw.name);
+
+
+        const response = await this.$axios.post("/", fd);
+
+        // return typeof response.errors === "undefined"
+        //   ? commit("UPDATE_DATA", response.data.changePoiType)
+        //   : response.errors;
+      })
+    );
   }
 };

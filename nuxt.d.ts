@@ -14,9 +14,6 @@ declare module "nuxt" {
 
   interface NuxtContext<S = any> {
     app: NuxtApp;
-    isClient: boolean;
-    isServer: boolean;
-    isStatic: boolean;
     isDev: boolean;
     isHMR: boolean;
     route: Route;

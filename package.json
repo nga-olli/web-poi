@@ -16,6 +16,7 @@
     "dotenv": "^5.0.1",
     "element-ui": "^2.3.7",
     "font-awesome": "^4.7.0",
+    "form-data": "^2.3.2",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "https": "^1.0.0",

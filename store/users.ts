@@ -21,7 +21,7 @@ export const actions = {
   async get_all({ commit }, { query }) {
     const response = await this.$axios.$post("/", {
       query: `{
-        getUsers(
+        getUsers (
           opts: {
             curPage: ${typeof query.page !== "undefined" ? query.page : 1},
             perPage: ${typeof query.limit !== "undefined" ? query.limit : 30},
@@ -52,7 +52,7 @@ export const actions = {
   async login_by_username({ commit }, formData) {
     const response = await this.$axios.$post("/", {
       query: `{
-        login(
+        login (
           input: {
             userName: "${formData.email}",
             password: "${formData.password}"

@@ -5,8 +5,11 @@
         <el-menu expand-trigger="hover" unique-opened :default-active="$route.path" router :collapse="isCollapse">
           <template>
             <el-menu-item index="/">
-              <i class="el-icon-fa-bank"></i> Types
+              <i class="el-icon-fa-braille"></i> Types
             </el-menu-item>
+            <!-- <el-menu-item>
+              <i class="el-icon-fa-bank"></i> Building
+            </el-menu-item> -->
             <el-menu-item index="/info">
               <i class="el-icon-fa-map-marker"></i> Infomation
             </el-menu-item>

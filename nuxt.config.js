@@ -30,59 +30,56 @@ const host =
   'localhost'
 
 module.exports = {
-  mode: 'spa',
+  mode: "spa",
   env: envConfig,
   router: {
-    middleware: ['init', 'check-auth' ]
+    middleware: ["init", "check-auth"]
   },
   head: {
-    titleTemplate: '%s - POI',
+    titleTemplate: "%s - POI",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'POI' },
-      { name: 'msapplication-config' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "POI" },
+      { name: "msapplication-config" }
     ],
     link: [
-      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }
     ]
   },
-  loading: { name: 'cube-grid', color: '#3B8070', background: '#333' },
+  loading: { name: "cube-grid", color: "#3B8070", background: "#333" },
   build: {
     analyze: false,
     vendor: [
-      'axios',
-      'vuex-class',
-      'nuxt-class-component',
-      'nuxt-property-decorator',
-      'vue-class-component',
-      '@johmun/vue-tags-input'
+      "axios",
+      "vuex-class",
+      "nuxt-class-component",
+      "nuxt-property-decorator",
+      "vue-class-component",
+      "@johmun/vue-tags-input",
+      "vue-notifications"
     ],
     extend(config, ctx) {
       if (!ctx.isDev) {
-        config.devtool = false
+        config.devtool = false;
       }
     }
   },
-  modules: [
-    '@nuxtjs/axios',
-    ['@nuxtjs/browserconfig', { TileColor: '#3f51b5' }],
-    '~/modules/typescript.js'
-  ],
+  modules: ["@nuxtjs/axios", ["@nuxtjs/browserconfig", { TileColor: "#3f51b5" }], "~/modules/typescript.js"],
   plugins: [
-    { src: '~plugins/elementui.ts' },
-    { src: '~plugins/fetch.ts' },
-    { src: '~plugins/scrolltop.ts' },
-    { src: '~plugins/notifications.ts' },
-    { src: '~plugins/tags-input.ts' },
+    { src: "~plugins/elementui.ts" },
+    { src: "~plugins/fetch.ts" },
+    { src: "~plugins/scrolltop.ts" },
+    { src: "~plugins/notifications.ts" },
+    { src: "~plugins/tags-input.ts" }
   ],
   axios: {
     baseURL: process.env.GRAPHQL_ENDPOINT,
-    timeout: 60,
+    timeout: 30,
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
   }
-}
+};
