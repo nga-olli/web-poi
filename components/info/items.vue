@@ -1,7 +1,7 @@
 <template>
   <section>
     <el-table :data="infos" style="width: 100%" row-key="id">
-      <el-table-column label="Name" width="450">
+      <el-table-column label="Name" >
         <template slot-scope="scope">
           <div class="address-content">
             <strong class="text-primary">
@@ -32,7 +32,7 @@
           <select-type :currentType="scope.row.type" :info="scope.row"></select-type>
         </template>
       </el-table-column>
-      <el-table-column label="Number" width="100" align="center">
+      <el-table-column label="Number" width="80" align="center">
         <template slot-scope="scope">
           <small v-if="scope.row.number.length > 0">{{ scope.row.number }}</small>
           <div v-else>
@@ -40,7 +40,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Street" width="180" align="center">
+      <el-table-column label="Street" width="140" align="center">
         <template slot-scope="scope">
           <small v-if="scope.row.street.length > 0">{{ scope.row.street }}</small>
           <div v-else>
@@ -48,8 +48,8 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Region" width="400" align="center">
-        <el-table-column label="Ward" width="150" align="center">
+      <el-table-column label="Region" width="300" align="center">
+        <el-table-column label="Ward" width="100" align="center">
           <template slot-scope="scope">
             <small v-if="scope.row.ward !== null">{{ scope.row.ward.name }}</small>
             <div v-else>
@@ -74,7 +74,7 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column label="Similar" width="300" align="center">
+      <el-table-column label="Similar"  align="center">
         <template slot-scope="scope">
           <el-tag
             v-for="(item, key) in scope.row.similar"
