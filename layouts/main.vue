@@ -9,6 +9,7 @@
       <sidebar></sidebar>
       <el-col :span="21">
         <nuxt></nuxt>
+        <footer-bottom></footer-bottom>
       </el-col>
     </el-row>
   </div>
@@ -17,11 +18,12 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import Sidebar  from '~/components/sidebar.vue'
-
+import FooterBottom from "~/components/footerbottom.vue";
 
 @Component({
   components: {
-    Sidebar
+    Sidebar,
+    FooterBottom
   }
 })
 export default class MainLayout extends Vue {}
@@ -143,17 +145,18 @@ body {
   margin-bottom: 50px;
   text-align: right;
 }
-.el-footer {
-  background-color: #424141;
-  color: #fff;
-  .copyright {
-    line-height: 60px;
-  }
-}
+
 .el-table .cell
 {
   word-break: normal;
 }
-
+.el-footer {
+  background-color: #4c9cef;
+  color: #fff;
+  text-align: center;
+  .copyright {
+    line-height: 40px;
+  }
+}
 
 </style>

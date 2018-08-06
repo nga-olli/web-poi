@@ -33,10 +33,8 @@
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
     </el-col>
-    <el-footer class="el-col el-col-24">
-      <div class="copyright">Copyright © 2018 olli-ai.com. All Rights Reserved	. Designed by Olli-team</div>
-    </el-footer>
-    <footer></footer>
+
+
   </el-row>
 </template>
 
@@ -46,7 +44,6 @@ import { Action, State } from "vuex-class";
 import Pagination from "~/components/pagination.vue";
 import EntityItems from "~/components/entity/items.vue";
 import HeaderTop from "~/components/headertop.vue";
-import Footer from "~/components/footer.vue";
 
 @Component({
   layout: "main",
@@ -54,8 +51,7 @@ import Footer from "~/components/footer.vue";
   components: {
     Pagination,
     EntityItems,
-    HeaderTop,
-    Footer,
+    HeaderTop
   }
 })
 export default class MainPage extends Vue {
