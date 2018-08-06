@@ -90,7 +90,7 @@ export default class AddTagButton extends Vue {
     color: whitesmoke
   }
   .submit-box {
-    text-align: right;
+    text-align: center;
     margin-right: 4px;
     margin-top: 6px;
   }
@@ -104,5 +104,9 @@ export default class AddTagButton extends Vue {
     right: 5px;
     z-index: 99999999;
     top: 3px;
+  }
+  .new-tag-input-wrapper input
+  {
+    text-align: center;
   }
 </style>

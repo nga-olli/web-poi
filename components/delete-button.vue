@@ -1,8 +1,8 @@
 <template>
   <div class="del-button-container">
     <el-popover ref="myPopover" placement="left" v-model="visible">
-      <p>Are you sure?</p>
-      <div style="text-align: right; margin: 0">
+      <p style="text-align: center">Are you sure?</p>
+      <div style="text-align: center; margin: 0">
         <el-button size="mini" type="text" @click="onCancel()">
           Cancel
         </el-button>
@@ -54,5 +54,8 @@ export default class DeleteButton extends Vue {
 }
 .del-button {
   color: #f56c6c;
+}
+.el-button-group .el-button:last-child {
+  border-radius: 3px;
 }
 </style>

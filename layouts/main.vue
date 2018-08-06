@@ -11,7 +11,6 @@
         <nuxt></nuxt>
       </el-col>
     </el-row>
-    <el-row class="footer"></el-row>
   </div>
 </template>
 
@@ -68,6 +67,93 @@ body {
     }
 
   }
+  .panelbody-box-search {
+  position: relative;
+  margin-top: 5px;
+  margin-left: 20px;
+  input {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    background: 0 0;
+    border: 1px solid #ddd;
+    padding-right: 14px;
+    padding-left: 36px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 0;
+    color: #666;
+    border-radius: 0;
+    opacity: 0.5;
+    &:focus,
+    &:active {
+      outline: none;
+      border-color: #38b7ea;
+    }
+  }
+  .el-input-group__prepend {
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    border: 0;
+    font-size: 15px;
+    color: #666;
+    background: transparent;
+    z-index: 10;
+    padding: 0;
+    cursor: pointer;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+.el-limit-filter {
+  display: inline-block;
+  margin-right: 20px;
+  .el-select .el-input {
+    width: 50px;
+    border-radius: 0;
+    margin-right: 5px;
+    input {
+      border-radius: 0;
+      border: 0;
+      height: 26px;
+      font-size: 13px;
+      padding-right: 21px;
+      background: #dddddd7d;
+      padding-left: 5px;
+      text-align: center;
+    }
+    .el-input__icon {
+      line-height: 26px;
+      font-size: 11px;
+      width: 19px;
+      color: #000;
+    }
+  }
+  span {
+    font-size: 12px;
+    color: #9a9898;
+  }
+}
+.pagination-bottom {
+  margin-bottom: 50px;
+  text-align: right;
+}
+.el-footer {
+  background-color: #424141;
+  color: #fff;
+  .copyright {
+    line-height: 60px;
+  }
+}
+.el-table .cell
+{
+  word-break: normal;
+}
 
 
 </style>

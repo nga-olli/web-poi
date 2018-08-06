@@ -1,7 +1,4 @@
 import FormData from 'form-data';
-import { concat } from '../node_modules/@types/async';
-const fileReaderStream = require("filereader-stream");
-import * as fs from "fs";
 
 export const state = () => ({
   data: [],
