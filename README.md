@@ -8,4 +8,4 @@
 
 # Pm2 (Fork mode)
 
-- pm2 start npm -- start
+- pm2 start --name web npm -- start
