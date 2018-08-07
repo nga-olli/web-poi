@@ -47,8 +47,8 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nuxt",
-    "build": "cross-env NODE_ENV=prod nuxt build",
-    "start": "cross-env NODE_ENV=prod nuxt start",
+    "build": "cross-env HOST=0.0.0.0 PORT=80 NODE_ENV=prod nuxt build",
+    "start": "cross-env HOST=0.0.0.0 PORT=80 NODE_ENV=prod nuxt start",
     "generate": "cross-env NODE_ENV=prod nuxt generate"
   },
   "devDependencies": {
