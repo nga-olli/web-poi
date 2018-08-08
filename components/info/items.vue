@@ -7,23 +7,23 @@
             <strong class="text-primary">
               {{ scope.row.name }}
             </strong>
-            <p>
-              <small>{{ scope.row.ggFullAddress }}</small>
-            </p>
-            <p v-if="scope.row.website.length > 0">
-              <i class="el-icon-fa-globe"></i> &nbsp;
-              <small>{{ scope.row.website }}</small>
-            </p>
-            <p v-if="scope.row.phoneNumber.length > 0">
-              <i class="el-icon-fa-phone"></i> &nbsp;
-              <small>{{ scope.row.phoneNumber }}</small>
-            </p>
-            <p>
-              <i class="el-icon-fa-compass"></i> &nbsp;
-              <small>Lat: <strong>{{ scope.row.lat }}</strong></small>
-              &nbsp;
-              <small>Lng: <strong>{{ scope.row.lng }}</strong></small>
-            </p>
+            <div class="showless">
+              <p><small>{{ scope.row.ggFullAddress }}</small></p>
+              <p v-if="scope.row.website.length > 0">
+                <i class="el-icon-fa-globe"></i> &nbsp;
+                <small>{{ scope.row.website }}</small>
+              </p>
+              <p v-if="scope.row.phoneNumber.length > 0">
+                <i class="el-icon-fa-phone"></i> &nbsp;
+                <small>{{ scope.row.phoneNumber }}</small>
+              </p>
+              <p>
+                <i class="el-icon-fa-compass"></i> &nbsp;
+                <small>Lat: <strong>{{ scope.row.lat }}</strong></small>
+                &nbsp;
+                <small>Lng: <strong>{{ scope.row.lng }}</strong></small>
+              </p>
+            </div>
           </div>
         </template>
       </el-table-column>
@@ -123,5 +123,38 @@ export default class InfoItems extends Vue {
   }
   [class^="el-icon-fa-times-circle"], [class*=" el-icon-fa-times-circle"] {
     font: normal normal normal 20px/1 FontAwesome !important;
+  }
+  .el-table__row   {
+      cursor: pointer;
+    .showless {
+      -webkit-transform: scaleY(0);
+      -o-transform: scaleY(0);
+      -ms-transform: scaleY(0);
+      transform: scaleY(0);
+
+      -webkit-transform-origin: top;
+      -o-transform-origin: top;
+      -ms-transform-origin: top;
+      transform-origin: top;
+
+      -webkit-transition: -webkit-transform 0.26s ease-out;
+      -o-transition: -o-transform 0.26s ease;
+      -ms-transition: -ms-transform 0.26s ease;
+      transition: transform 0.26s ease;
+      height: 0;
+
+    }
+    &:hover .showless {
+      -webkit-transform: scaleY(1);
+      -o-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+      transform: scaleY(1);
+      height: auto;
+    }
+  }
+  @media (max-width: 1600px) {
+    .address-content .text-primary {
+      font-size: 13px;
+    }
   }
 </style>

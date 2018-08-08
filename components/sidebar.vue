@@ -37,10 +37,10 @@ aside {
   -webkit-box-shadow: 0 0 20px rgba(154, 158, 175, 0.68);
 }
 .logo {
-  padding: 20px 12px;
+  padding: 20px 15px;
 }
 .el-col-1 {
-  width: 4.16667% !important;
+  width: 72px !important;
   overflow: visible;
 }
 
@@ -78,15 +78,19 @@ aside {
     position: absolute;
 
     min-width: 100px;
-    left: -35px;
+    left: -28px;
 
     [class^="el-icon-"] {
       color: #c1b1c7;
       width: auto;
-      padding-left: 35px;
+      padding-left: 30px;
+
       &:before {
         font-size: 25px;
       }
+    }
+    .el-icon-fa-map-marker {
+      margin-top: -2px;
     }
     span {
       display: none;
@@ -117,6 +121,7 @@ aside {
           font-size: 16px;
         }
       }
+
 
     }
   }

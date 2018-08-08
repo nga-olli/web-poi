@@ -7,7 +7,7 @@
     </el-row> -->
     <el-row class="container">
       <sidebar></sidebar>
-      <el-col :span="23">
+      <el-col :span="24" class="wrapper-content">
         <nuxt></nuxt>
         <footer-bottom></footer-bottom>
       </el-col>
@@ -47,6 +47,7 @@ body {
 .container.el-row {
     display: flex;
     display: -webkit-flex;
+    overflow: hidden;
   }
   .panel-body {
     padding: 20px;
