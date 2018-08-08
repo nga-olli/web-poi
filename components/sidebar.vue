@@ -1,17 +1,17 @@
 <template>
-    <el-aside class="el-col-3">
+    <el-aside class="el-col-1">
       <el-col :span="24"><div class="logo"><img src="/img/logo-olli.png" width="40"></div></el-col>
        <el-col :span="24">
         <el-menu expand-trigger="hover" unique-opened :default-active="$route.path" router :collapse="isCollapse">
           <template>
-            <el-menu-item index="/">
-              <i class="el-icon-fa-braille"></i> Types
+            <el-menu-item index="/" >
+              <i class="el-icon-fa-braille"></i> <span>Types</span>
             </el-menu-item>
             <!-- <el-menu-item>
               <i class="el-icon-fa-bank"></i> Building
             </el-menu-item> -->
             <el-menu-item index="/info">
-              <i class="el-icon-fa-map-marker"></i> Infomation
+              <i class="el-icon-fa-map-marker"></i> <span>Infomation</span>
             </el-menu-item>
           </template>
         </el-menu>
@@ -37,10 +37,11 @@ aside {
   -webkit-box-shadow: 0 0 20px rgba(154, 158, 175, 0.68);
 }
 .logo {
-  padding: 20px;
+  padding: 20px 15px;
 }
-.el-col-3 {
-  width: 12.5% !important;
+.el-col-1 {
+  width: 72px !important;
+  overflow: visible;
 }
 
 .el-menu--collapse {
@@ -55,42 +56,81 @@ aside {
 </style>
 
 <style lang="scss">
-.el-menu--collapse > .el-menu-item .el-submenu__icon-arrow,
-.el-menu--collapse > .el-submenu > .el-submenu__title .el-submenu__icon-arrow {
+.el-menu--collapse > .el-menu-item .el-submenu__icon-arrow{
   display: block;
 }
 
 .el-menu {
   border: 0;
-  .el-menu-item,
-  .el-submenu__title {
+  position: relative;
+  z-index: 1;
+  .el-menu-item
+  {
     height: 30px;
     line-height: 30px;
     border-right: 2px solid transparent;
     color: #878d99;
     text-transform: uppercase;
-    margin-bottom: 15px;
-    font-size: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding: 0 10px !important;
+    text-align: center;
+    position: absolute;
+
+    min-width: 100px;
+    left: -28px;
+
     [class^="el-icon-"] {
       color: #c1b1c7;
+      width: auto;
+      padding-left: 30px;
+
+      &:before {
+        font-size: 25px;
+      }
     }
-    &:hover,
-    &:hover .el-icon-fa,
-    &:hover .el-submenu__icon-arrow,
+    .el-icon-fa-map-marker {
+      margin-top: -2px;
+    }
+    span {
+      display: none;
+    }
+    &:nth-child(2) {
+      top: 50px;
+    }
     &.is-active {
       background: transparent;
       border-color: #409eff;
       color: #409eff;
+
+    }
+    &:hover {
+      left: 0;
+      background: #409eff;
+      border-color: #409eff;
+      color: #fff;
+      transition: 0.3s ease-out;
+      span {
+        display: inline-block;
+      }
+      [class^="el-icon-"] {
+        padding-left: 0;
+        padding-right: 10px;
+        color: #fff;
+        &:before {
+          font-size: 16px;
+        }
+      }
+
+
     }
   }
 }
-.el-submenu.is-opened {
-  .el-submenu__title,
-  .el-icon-fa,
-  .el-submenu__icon-arrow {
-    border-color: #409eff;
-    color: #409eff;
-  }
+.el-submenu.is-opened .el-icon-fa {
+
+  border-color: #409eff;
+  color: #409eff;
+
 }
 .el-menu--popup-right-start {
   margin-left: 0;

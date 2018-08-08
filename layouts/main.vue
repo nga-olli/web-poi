@@ -7,8 +7,9 @@
     </el-row> -->
     <el-row class="container">
       <sidebar></sidebar>
-      <el-col :span="21">
+      <el-col :span="24" class="wrapper-content">
         <nuxt></nuxt>
+        <footer-bottom></footer-bottom>
       </el-col>
     </el-row>
   </div>
@@ -17,11 +18,12 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import Sidebar  from '~/components/sidebar.vue'
-
+import FooterBottom from "~/components/footerbottom.vue";
 
 @Component({
   components: {
-    Sidebar
+    Sidebar,
+    FooterBottom
   }
 })
 export default class MainLayout extends Vue {}
@@ -45,6 +47,7 @@ body {
 .container.el-row {
     display: flex;
     display: -webkit-flex;
+    overflow: hidden;
   }
   .panel-body {
     padding: 20px;
@@ -143,17 +146,18 @@ body {
   margin-bottom: 50px;
   text-align: right;
 }
-.el-footer {
-  background-color: #424141;
-  color: #fff;
-  .copyright {
-    line-height: 60px;
-  }
-}
+
 .el-table .cell
 {
   word-break: normal;
 }
-
+.el-footer {
+  background-color: #6ba0d824;
+  color: #00000096;
+  text-align: right;
+  .copyright {
+    line-height: 40px;
+  }
+}
 
 </style>
