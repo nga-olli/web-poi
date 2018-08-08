@@ -49,6 +49,7 @@ export const actions = {
             phoneNumber,
             rating,
             ggFullAddress,
+            status,
             dateCreated
           },
           meta {
@@ -134,5 +135,9 @@ export const actions = {
         //   : response.errors;
       })
     );
+  },
+
+  async changeStatus({ commit }, { formData }) {
+    console.log(formData)
   }
 };

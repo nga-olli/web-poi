@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'nuxt-property-decorator';
+import { Vue, Component, Watch, Prop } from 'nuxt-property-decorator';
 import { Action, State } from 'vuex-class';
 
 @Component({
@@ -23,12 +23,26 @@ import { Action, State } from 'vuex-class';
   // }
 })
 export default class PublishButton extends Vue {
+  @Prop() id: number;
+  @Prop() status: number;
   // @Action('infos/import_octoparse') importAction;
 
   isPublish: boolean = false;
 
   onChange() {
     console.log(this.isPublish)
+    console.log(this.id)
+    console.log(this.status)
+  }
+
+  created() {
+    switch (this.status) {
+      case 1:
+        this.isPublish = true;
+        break;
+      case 3:
+        this.isPublish = false;
+    }
   }
 }
 

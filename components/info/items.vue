@@ -29,7 +29,7 @@
       </el-table-column>
       <el-table-column label="Publish?" align="center" width="100">
         <template slot-scope="scope">
-          <publish-button :id="scope.row.id"></publish-button>
+          <publish-button :id="scope.row.id" :status="scope.row.status"></publish-button>
         </template>
       </el-table-column>
       <el-table-column label="Type" align="center" width="200">
