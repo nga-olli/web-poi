@@ -110,20 +110,43 @@ export default class PoiInfoPage extends Vue {
 <style lang="scss">
 
 .el-select-dropdown__wrap {
-    max-height: none;
-    padding: 15px 0 30px 0;
-    overflow: hidden;
-    .el-select-dropdown__list {
-      height: auto;
-      max-height: 274px;
-      overflow-y: scroll;
-      overflow-x: hidden;
+  max-height: none;
+  padding: 15px 0 30px 0;
+  overflow: hidden;
+  .el-select-dropdown__list {
+    height: auto;
+    max-height: 274px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+.header-right > div {
+  display: inline-block;
+  .el-upload__tip {
+    display: inline-block;
+  }
+}
+.el-table thead.is-group th {
+  padding: 0;
+  line-height: 40px;
+  font-weight: normal;
+  font-size: 13px;
+}
+.el-table .el-table__row  td {
+  padding: 0;
+}
+.el-table .el-table__row  td{
+  vertical-align: top;
+  &.is-center .cell {
+    
+    .el-icon-fa {
+      line-height: 40px !important;
     }
   }
-  .header-right > div {
-    display: inline-block;
-    .el-upload__tip {
-      display: inline-block;
-    }
+}
+.el-select .el-input__inner {
+    border: 0;
+    background-color: transparent;
+    font-size: 12px;
   }
 </style>
