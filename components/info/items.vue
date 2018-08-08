@@ -32,7 +32,7 @@
           <select-type :currentType="scope.row.type" :info="scope.row"></select-type>
         </template>
       </el-table-column>
-      <el-table-column label="Number" width="80" align="center">
+      <el-table-column label="Number" width="120" align="center">
         <template slot-scope="scope">
           <small v-if="scope.row.number.length > 0">{{ scope.row.number }}</small>
           <div v-else>
@@ -49,7 +49,7 @@
         </template>
       </el-table-column>
       <el-table-column label="Region" width="300" align="center">
-        <el-table-column label="Ward" width="100" align="center">
+        <el-table-column label="Ward" width="150" align="center">
           <template slot-scope="scope">
             <small v-if="scope.row.ward !== null">{{ scope.row.ward.name }}</small>
             <div v-else>
@@ -73,20 +73,6 @@
             </div>
           </template>
         </el-table-column>
-      </el-table-column>
-      <el-table-column label="Similar"  align="center">
-        <template slot-scope="scope">
-          <el-tag
-            v-for="(item, key) in scope.row.similar"
-            v-if="item.length > 0"
-            :key="key"
-            closable
-            class="similar-item"
-            type="success"
-            @close="onRemove(scope.row.id, item)">
-            {{ item }}
-          </el-tag>
-        </template>
       </el-table-column>
     </el-table>
     <no-ssr>

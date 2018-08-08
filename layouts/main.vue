@@ -7,7 +7,7 @@
     </el-row> -->
     <el-row class="container">
       <sidebar></sidebar>
-      <el-col :span="21">
+      <el-col :span="23">
         <nuxt></nuxt>
         <footer-bottom></footer-bottom>
       </el-col>

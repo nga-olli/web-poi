@@ -2,7 +2,7 @@
   <el-row class="main-content">
     <header-top></header-top>
     <el-col :span="24">
-      <div style="text-align: right;">
+      <div class="header-right" style="text-align: right;">
         <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
         <div class="el-limit-filter ">
@@ -26,7 +26,7 @@
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
     </el-col>
-    
+
 
 
   </el-row>
@@ -118,17 +118,8 @@ export default class PoiInfoPage extends Vue {
 }
 </script>
 
-
-<style lang="scss" scoped>
-
-</style>
-
-
-
 <style lang="scss">
-.el-table__body, .el-table__footer, .el-table__header {
-  //width: 100% !important;
-}
+
 .el-select-dropdown__wrap {
     max-height: none;
     padding: 15px 0 30px 0;
@@ -138,6 +129,12 @@ export default class PoiInfoPage extends Vue {
       max-height: 274px;
       overflow-y: scroll;
       overflow-x: hidden;
+    }
+  }
+  .header-right > div {
+    display: inline-block;
+    .el-upload__tip {
+      display: inline-block;
     }
   }
 </style>
