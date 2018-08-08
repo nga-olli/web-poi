@@ -91,6 +91,7 @@ export const actions = {
             phoneNumber,
             rating,
             ggFullAddress,
+            status,
             dateCreated
           }
         }
@@ -137,7 +138,48 @@ export const actions = {
     );
   },
 
-  async changeStatus({ commit }, { formData }) {
-    console.log(formData)
+  async change_status({ commit }, { id, value }) {
+    let status = 0;
+
+    switch (value) {
+      case true:
+        status = 1;
+        break;
+      case false:
+        status = 3;
+        break;
+    }
+
+    const response = await this.$axios.$post("/", { query: `
+        mutation (
+          $id: Int!,
+          $status: Int!
+        ) {
+          changeStatus(
+            id: $id,
+            status: $status
+          ) {
+            type { id, name },
+            id,
+            name,
+            similar,
+            number,
+            street,
+            ward { id, name},
+            district { id, name},
+            city { id, name},
+            lat,
+            lng,
+            website,
+            phoneNumber,
+            rating,
+            ggFullAddress,
+            status,
+            dateCreated
+          }
+        }
+      `, variables: { id: parseInt(id), status: status } });
+
+    return typeof response.errors === "undefined" ? commit("UPDATE_DATA", response.data.changeStatus) : response.errors;
   }
 };

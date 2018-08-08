@@ -25,14 +25,15 @@ import { Action, State } from 'vuex-class';
 export default class PublishButton extends Vue {
   @Prop() id: number;
   @Prop() status: number;
-  // @Action('infos/import_octoparse') importAction;
+  @Action('infos/change_status') changeStatusAction;
 
   isPublish: boolean = false;
 
   onChange() {
-    console.log(this.isPublish)
-    console.log(this.id)
-    console.log(this.status)
+    this.changeStatusAction({
+      id: this.id,
+      value: this.isPublish
+    })
   }
 
   created() {
@@ -42,6 +43,7 @@ export default class PublishButton extends Vue {
         break;
       case 3:
         this.isPublish = false;
+        break;
     }
   }
 }
