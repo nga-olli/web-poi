@@ -133,19 +133,19 @@ export default class InfoItems extends Vue {
     font: normal normal normal 20px/1 FontAwesome !important;
   }
   .el-table__row  {
-      cursor: pointer;
-    .showless {
-    -webkit-transition: max-height 0.3s;
-    -moz-transition: max-height 0.5s;
-    -ms-transition: max-height 1s;
-    -o-transition: max-height 1s;
-    transition: max-height 0.3s;
-    max-height: 0;
-    padding: 10px 0;
-    }
-    &:hover .showless {
-      max-height: 300px;
-    }
+    //   cursor: pointer;
+    // .showless {
+    // -webkit-transition: max-height 0.3s;
+    // -moz-transition: max-height 0.5s;
+    // -ms-transition: max-height 1s;
+    // -o-transition: max-height 1s;
+    // transition: max-height 0.3s;
+    // max-height: 0;
+    // padding: 10px 0;
+    // }
+    // &:hover .showless {
+    //   max-height: 300px;
+    // }
   }
   .address-content .text-primary {
     font-size: 13px;
