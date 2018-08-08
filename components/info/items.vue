@@ -101,6 +101,7 @@ export default class InfoItems extends Vue {
 </script>
 
 <style lang="scss" scoped>
+
   .similar-item {
     margin-right: 6px;
     margin-bottom: 6px;
@@ -124,37 +125,23 @@ export default class InfoItems extends Vue {
   [class^="el-icon-fa-times-circle"], [class*=" el-icon-fa-times-circle"] {
     font: normal normal normal 20px/1 FontAwesome !important;
   }
-  .el-table__row   {
+  .el-table__row  {
       cursor: pointer;
     .showless {
-      -webkit-transform: scaleY(0);
-      -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-      transform: scaleY(0);
-
-      -webkit-transform-origin: top;
-      -o-transform-origin: top;
-      -ms-transform-origin: top;
-      transform-origin: top;
-
-      -webkit-transition: -webkit-transform 0.26s ease-out;
-      -o-transition: -o-transform 0.26s ease;
-      -ms-transition: -ms-transform 0.26s ease;
-      transition: transform 0.26s ease;
-      height: 0;
-
+    -webkit-transition: max-height 0.3s;
+    -moz-transition: max-height 0.5s;
+    -ms-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    transition: max-height 0.3s;
+    max-height: 0;
+    padding: 10px 0;
     }
     &:hover .showless {
-      -webkit-transform: scaleY(1);
-      -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-      transform: scaleY(1);
-      height: auto;
+      max-height: 300px;
     }
   }
-  @media (max-width: 1600px) {
-    .address-content .text-primary {
-      font-size: 13px;
-    }
+  .address-content .text-primary {
+    font-size: 13px;
   }
+
 </style>
