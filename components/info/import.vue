@@ -15,7 +15,7 @@
       Import
     </el-button>
     <div class="el-upload__tip" slot="tip">
-      Only .xsls is allowed
+      &nbsp; Only <code>.xlsx</code> is allowed
     </div>
   </el-upload>
 </template>

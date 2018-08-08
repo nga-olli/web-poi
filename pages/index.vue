@@ -12,17 +12,6 @@
         </div>
         <el-button type="text" icon="el-icon-plus">Add entity</el-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
-        <div class="el-limit-filter">
-          <el-select v-model="value8">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-        <span>per page </span>
-        </div>
       </div>
     </el-col>
     <el-col :span="24">
@@ -84,33 +73,6 @@ export default class MainPage extends Vue {
       ]
     };
   }
-  data() {
-    return {
-      options: [
-        {
-          value: "5",
-          label: "5"
-        },
-        {
-          value: "10",
-          label: "10"
-        },
-        {
-          value: "20",
-          label: "20"
-        },
-        {
-          value: "50",
-          label: "50"
-        },
-        {
-          value: "100",
-          label: "100"
-        }
-      ],
-      value8: "20"
-    };
-  }
 
   created() {
     this.initData();
@@ -125,8 +87,6 @@ export default class MainPage extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
-
 </style>
 
 

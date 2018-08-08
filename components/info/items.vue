@@ -27,6 +27,11 @@
           </div>
         </template>
       </el-table-column>
+      <el-table-column label="Publish?" align="center" width="100">
+        <template slot-scope="scope">
+          <publish-button :id="scope.row.id"></publish-button>
+        </template>
+      </el-table-column>
       <el-table-column label="Type" align="center" width="200">
         <template slot-scope="scope">
           <select-type :currentType="scope.row.type" :info="scope.row"></select-type>
@@ -87,12 +92,14 @@ import { Action } from 'vuex-class';
 import DeleteButton from '~/components/delete-button.vue';
 import ChangeRegionButton from '~/components/info/change-region-button.vue';
 import SelectType from '~/components/info/select-type.vue';
+import PublishButton from '~/components/info/publish-button.vue';
 
 @Component({
   components: {
     DeleteButton,
     ChangeRegionButton,
-    SelectType
+    SelectType,
+    PublishButton
   }
 })
 export default class InfoItems extends Vue {
