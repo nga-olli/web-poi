@@ -4,26 +4,27 @@
       <el-table-column label="Name" >
         <template slot-scope="scope">
           <div class="address-content">
-            <strong class="text-primary">
-              {{ scope.row.name }}
-            </strong>
-            <div class="showless">
-              <p><small>{{ scope.row.ggFullAddress }}</small></p>
-              <p v-if="scope.row.website.length > 0">
-                <i class="el-icon-fa-globe"></i> &nbsp;
-                <small>{{ scope.row.website }}</small>
-              </p>
-              <p v-if="scope.row.phoneNumber.length > 0">
-                <i class="el-icon-fa-phone"></i> &nbsp;
-                <small>{{ scope.row.phoneNumber }}</small>
-              </p>
-              <p>
-                <i class="el-icon-fa-compass"></i> &nbsp;
-                <small>Lat: <strong>{{ scope.row.lat }}</strong></small>
-                &nbsp;
-                <small>Lng: <strong>{{ scope.row.lng }}</strong></small>
-              </p>
-            </div>
+            <el-collapse  accordion>
+              <el-collapse-item :title="scope.row.name" name="1">
+                <div class="showless">
+                  <p><small>{{ scope.row.ggFullAddress }}</small></p>
+                  <p v-if="scope.row.website.length > 0">
+                    <i class="el-icon-fa-globe"></i> &nbsp;
+                    <small>{{ scope.row.website }}</small>
+                  </p>
+                  <p v-if="scope.row.phoneNumber.length > 0">
+                    <i class="el-icon-fa-phone"></i> &nbsp;
+                    <small>{{ scope.row.phoneNumber }}</small>
+                  </p>
+                  <p>
+                    <i class="el-icon-fa-compass"></i> &nbsp;
+                    <small>Lat: <strong>{{ scope.row.lat }}</strong></small>
+                    &nbsp;
+                    <small>Lng: <strong>{{ scope.row.lng }}</strong></small>
+                  </p>
+                </div>
+             </el-collapse-item>
+            </el-collapse>
           </div>
         </template>
       </el-table-column>
@@ -132,21 +133,7 @@ export default class InfoItems extends Vue {
   [class^="el-icon-fa-times-circle"], [class*=" el-icon-fa-times-circle"] {
     font: normal normal normal 20px/1 FontAwesome !important;
   }
-  .el-table__row  {
-    //   cursor: pointer;
-    // .showless {
-    // -webkit-transition: max-height 0.3s;
-    // -moz-transition: max-height 0.5s;
-    // -ms-transition: max-height 1s;
-    // -o-transition: max-height 1s;
-    // transition: max-height 0.3s;
-    // max-height: 0;
-    // padding: 10px 0;
-    // }
-    // &:hover .showless {
-    //   max-height: 300px;
-    // }
-  }
+  
   .address-content .text-primary {
     font-size: 13px;
   }

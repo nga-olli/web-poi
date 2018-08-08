@@ -151,8 +151,8 @@ body {
   word-break: normal;
 }
 .el-footer {
-  background-color: #6ba0d824;
-  color: #00000096;
+  background-color: rgba(0, 161, 255, 0.03);
+  color: rgba(0, 0, 0, 0.58824);
   text-align: right;
   .copyright {
     line-height: 40px;
