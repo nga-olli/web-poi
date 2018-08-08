@@ -135,18 +135,30 @@ export default class PoiInfoPage extends Vue {
 .el-table .el-table__row  td {
   padding: 0;
 }
-.el-table .el-table__row  td{
+.el-table .el-table__row  td.is-center{
   vertical-align: top;
-  &.is-center .cell {
-    
-    .el-icon-fa {
-      line-height: 40px !important;
-    }
-  }
+  padding-top: 10px;
 }
 .el-select .el-input__inner {
+  border: 0;
+  background-color: transparent;
+  font-size: 12px;
+}
+.address-content {
+  .el-collapse-item__header {
     border: 0;
     background-color: transparent;
-    font-size: 12px;
+    color: #409EFF;
+    font-weight: bold;
+    font-size: 13px;
   }
+  .el-collapse {
+    border: 0;
+  }
+  .el-collapse-item__wrap {
+    background-color: transparent;
+    border: 0;
+  }
+}
+
 </style>
