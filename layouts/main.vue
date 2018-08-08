@@ -115,7 +115,6 @@ body {
 
 .el-limit-filter {
   display: inline-block;
-  margin-right: 20px;
   .el-select .el-input {
     width: 50px;
     border-radius: 0;

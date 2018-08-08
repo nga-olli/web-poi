@@ -1,7 +1,11 @@
 <template>
     <el-aside class="el-col-1">
-      <el-col :span="24"><div class="logo"><img src="/img/logo-olli.png" width="40"></div></el-col>
-       <el-col :span="24">
+      <el-col :span="24">
+        <nuxt-link to="/">
+          <div class="logo"><img src="/img/logo-olli.png" width="40"></div>
+        </nuxt-link>
+      </el-col>
+      <el-col :span="24">
         <el-menu expand-trigger="hover" unique-opened :default-active="$route.path" router :collapse="isCollapse">
           <template>
             <el-menu-item index="/" >

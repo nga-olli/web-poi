@@ -5,17 +5,6 @@
       <div class="header-right" style="text-align: right;">
         <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
-        <div class="el-limit-filter ">
-          <el-select v-model="value8" filterable placeholder="Select limit">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-        <span>per page </span>
-        </div>
       </div>
     </el-col>
     <el-col :span="24">
