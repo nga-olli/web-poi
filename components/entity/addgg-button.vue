@@ -43,10 +43,10 @@ import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator';
 import { Action } from 'vuex-class';
 
 @Component
-export default class AddTagButton extends Vue {
+export default class AddGgButton extends Vue {
   @Prop() id: number;
   @Prop() store: string;
-  @Action('entities/update_similar') updateSimilarAction;
+  @Action('entities/update_gg_similar') updateGgSimilarAction;
 
   loading: boolean = false;
   visible: boolean = false;
@@ -58,7 +58,7 @@ export default class AddTagButton extends Vue {
   async onConfirm() {
     this.loading = true;
 
-    await this.updateSimilarAction({
+    await this.updateGgSimilarAction({
       id: this.id,
       similar: this.tags
     });

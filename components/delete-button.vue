@@ -20,30 +20,34 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator";
 
-@Component
+@Component({
+  notifications: {
+    deleteSuccess: {
+      icon: 'fas fa-exclamation-triangle',
+      position: 'bottomCenter',
+      title: 'Delete',
+      toastOnce: true,
+      type: 'success'
+    }
+  }
+})
 export default class DeleteButton extends Vue {
   @Prop() id: number;
   @Prop() store: string;
 
   visible: boolean = false;
+  deleteSuccess: ({ message: string }) => void;
 
   onCancel() { this.visible = false; }
 
   async onConfirm() {
     this.visible = false;
 
-    await this.$store
-      .dispatch(`${this.store}/delete`, {
+    await this.$store.dispatch(`${this.store}/delete`, {
         id: this.id
-      })
-      .then(res => {
-        this.$message({
-          showClose: true,
-          message: `#${this.id} delete successfully`,
-          type: "success",
-          duration: 3 * 1000
-        });
       });
+
+    this.deleteSuccess({message: 'OK'});
   }
 }
 </script>

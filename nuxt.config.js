@@ -49,7 +49,7 @@ module.exports = {
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }
     ]
   },
-  loading: { name: "cube-grid", color: "#3B8070", background: "#333" },
+  loading: { color: "#2ecc71", height: "10px" },
   build: {
     analyze: false,
     vendor: [

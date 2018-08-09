@@ -8,18 +8,19 @@ export const state = () => ({
 
 export const mutations = {
   SET_DATA(state, response) {
-    state.data = response.getPoiTypes.items || null;
-    state.totalItems = response.getPoiTypes.meta.totalResults || 0;
-    state.recordPerPage = response.getPoiTypes.meta.perPage || 20;
-    state.query.page = response.getPoiTypes.meta.curPage || 1;
+    state.data = response.items || null;
+    state.totalItems = response.meta.totalResults || 0;
+    state.recordPerPage = response.meta.perPage || 20;
+    state.query.page = response.meta.curPage || 1;
   },
-  UPDATE_SIMILAR(state, response) {
-    const index = state.data.findIndex(item => item.id === response.updatePoiTypeSimilar.id);
-    state.data.splice(index, 1, response.updatePoiTypeSimilar);
+  UPDATE_DATA(state, response) {
+    const index = state.data.findIndex(item => item.id === response.id);
+    state.data.splice(index, 1, response);
   },
-  REMOVE_SIMILAR_ITEM(state, response) {
-    const index = state.data.findIndex(item => item.id === response.removePoiTypeSimilarItem.id);
-    state.data.splice(index, 1, response.removePoiTypeSimilarItem);
+  DELETE_DATA(state, id) {
+    const index = state.data.findIndex(item => item.id === id);
+    state.data.splice(index, 1);
+    state.totalItems = state.totalItems - 1;
   }
 };
 
@@ -39,6 +40,7 @@ export const actions = {
               id,
               name,
               similar,
+              ggSimilar,
               dateCreated
           },
           meta {
@@ -51,10 +53,43 @@ export const actions = {
       }`
     });
 
-    return typeof response.errors === "undefined" ? commit("SET_DATA", response.data) : response.errors;
+    return typeof response.errors === "undefined"
+      ? commit("SET_DATA", response.data.getPoiTypes)
+      : response.errors;
   },
 
   async update_similar({ commit }, { id, similar }) {
+    let similarArr = [];
+    await Promise.all(
+      similar.map(item => {
+        similarArr.push(item.text);
+      })
+    );
+
+    const response = await this.$axios.$post("/", { query: `
+        mutation (
+          $id: Int!,
+          $input: JSON!
+        ) {
+          updatePoiTypeSimilar(
+            id: $id,
+            input: $input
+          ) {
+            id,
+            name,
+            similar,
+            ggSimilar,
+            dateCreated
+          }
+        }
+      `, variables: { id: id, input: { similar: similarArr.join(",") } } });
+
+    return typeof response.errors === "undefined"
+      ? commit("UPDATE_DATA", response.data.updatePoiTypeSimilar)
+      : response.errors;
+  },
+
+  async update_gg_similar({ commit }, { id, similar }) {
     let similarArr = [];
     await Promise.all(
       similar.map(item => {
@@ -68,13 +103,14 @@ export const actions = {
           $id: Int!,
           $input: JSON!
         ) {
-          updatePoiTypeSimilar(
+          updatePoiTypeGgSimilar(
             id: $id,
             input: $input
           ) {
             id,
             name,
             similar,
+            ggSimilar,
             dateCreated
           }
         }
@@ -87,12 +123,13 @@ export const actions = {
       }
     });
 
-    return typeof response.errors === "undefined" ? commit("UPDATE_SIMILAR", response.data) : response.errors;
+    return typeof response.errors === "undefined"
+      ? commit("UPDATE_DATA", response.data.updatePoiTypeGgSimilar)
+      : response.errors;
   },
 
   async remove_similar_item({ commit }, { id, similarItem }) {
-    const response = await this.$axios.$post("/", {
-      query: `
+    const response = await this.$axios.$post("/", { query: `
         mutation (
           $id: Int!,
           $input: JSON!
@@ -104,6 +141,32 @@ export const actions = {
             id,
             name,
             similar,
+            ggSimilar,
+            dateCreated
+          }
+        }
+      `, variables: { id: id, input: { similarItem: similarItem } } });
+
+    return typeof response.errors === "undefined"
+      ? commit("UPDATE_DATA", response.data.removePoiTypeSimilarItem)
+      : response.errors;
+  },
+
+  async remove_gg_similar_item({ commit }, { id, similarItem }) {
+    const response = await this.$axios.$post("/", {
+      query: `
+        mutation (
+          $id: Int!,
+          $input: JSON!
+        ) {
+          removePoiTypeGgSimilarItem(
+            id: $id,
+            input: $input
+          ) {
+            id,
+            name,
+            similar,
+            ggSimilar,
             dateCreated
           }
         }
@@ -116,6 +179,29 @@ export const actions = {
       }
     });
 
-    return typeof response.errors === "undefined" ? commit("REMOVE_SIMILAR_ITEM", response.data) : response.errors;
+    return typeof response.errors === "undefined"
+      ? commit("UPDATE_DATA", response.data.removePoiTypeGgSimilarItem)
+      : response.errors;
+  },
+
+  async delete({ commit }, { id }) {
+    const response = await this.$axios.$post("/", {
+      query: `
+        mutation (
+          $id: Int!
+        ) {
+          removePoiType(
+            id: $id
+          )
+        }
+      `,
+      variables: {
+        id: id
+      }
+    });
+
+    return typeof response.errors === "undefined"
+      ? commit("DELETE_DATA", id)
+      : response.errors;
   }
 };
