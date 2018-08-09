@@ -151,6 +151,19 @@ export default class PoiInfoPage extends Vue {
     color: #409EFF;
     font-weight: bold;
     font-size: 13px;
+    padding: 10px 0;
+    height: auto;
+    line-height: 25px;
+    position: relative;
+    .el-collapse-item__arrow {
+      line-height: inherit;
+    }
+    .full-address {
+      line-height: 15px;
+      color: #303133;
+      font-weight: normal;
+      padding-right: 20px;
+    }
   }
   .el-collapse {
     border: 0;

@@ -5,9 +5,10 @@
         <template slot-scope="scope">
           <div class="address-content">
             <el-collapse  accordion>
-              <el-collapse-item :title="scope.row.name" name="1">
+              <el-collapse-item  name="1">
+              <template slot="title">{{ scope.row.name }}<p class="full-address"><small>{{ scope.row.ggFullAddress }}</small></p></template>
                 <div class="showless">
-                  <p><small>{{ scope.row.ggFullAddress }}</small></p>
+
                   <p v-if="scope.row.website.length > 0">
                     <i class="el-icon-fa-globe"></i> &nbsp;
                     <small>{{ scope.row.website }}</small>
@@ -133,7 +134,7 @@ export default class InfoItems extends Vue {
   [class^="el-icon-fa-times-circle"], [class*=" el-icon-fa-times-circle"] {
     font: normal normal normal 20px/1 FontAwesome !important;
   }
-  
+
   .address-content .text-primary {
     font-size: 13px;
   }
