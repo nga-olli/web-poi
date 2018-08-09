@@ -1,5 +1,5 @@
 <template>
-  <el-row class="main-content">
+  <el-row class="main-content page-type">
     <header-top></header-top>
     <el-col :span="24">
       <div style="text-align: right;">
