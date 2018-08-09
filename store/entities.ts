@@ -35,19 +35,19 @@ export const actions = {
             q: "${typeof query.q !== "undefined" ? query.q : ""}",
             sort: "${typeof query.sort !== "undefined" ? query.sort : "-id"}"
           }
-          ) {
+        ) {
           items {
-              id,
-              name,
-              similar,
-              ggSimilar,
-              dateCreated
+            id,
+            name,
+            similar,
+            ggSimilar,
+            dateCreated
           },
           meta {
-              curPage,
-              perPage,
-              totalPages,
-              totalResults
+            curPage,
+            perPage,
+            totalPages,
+            totalResults
           }
         }
       }`
@@ -55,6 +55,24 @@ export const actions = {
 
     return typeof response.errors === "undefined"
       ? commit("SET_DATA", response.data.getPoiTypes)
+      : response.errors;
+  },
+
+  async suggest({ commit }, { keyword }) {
+    const response = await this.$axios.$post("/", { query: `{
+        searchPoiTypes (
+          q: "${typeof keyword !== "undefined" ? keyword : ""}"
+        ) {
+          id,
+          name,
+          similar,
+          ggSimilar,
+          dateCreated
+        }
+      }` });
+
+    return typeof response.errors === "undefined"
+      ? response.data.searchPoiTypes
       : response.errors;
   },
 
@@ -71,7 +89,7 @@ export const actions = {
           $id: Int!,
           $input: JSON!
         ) {
-          updatePoiTypeSimilar(
+          updatePoiTypeSimilar (
             id: $id,
             input: $input
           ) {
@@ -103,7 +121,7 @@ export const actions = {
           $id: Int!,
           $input: JSON!
         ) {
-          updatePoiTypeGgSimilar(
+          updatePoiTypeGgSimilar (
             id: $id,
             input: $input
           ) {
@@ -134,7 +152,7 @@ export const actions = {
           $id: Int!,
           $input: JSON!
         ) {
-          removePoiTypeSimilarItem(
+          removePoiTypeSimilarItem (
             id: $id,
             input: $input
           ) {
@@ -159,7 +177,7 @@ export const actions = {
           $id: Int!,
           $input: JSON!
         ) {
-          removePoiTypeGgSimilarItem(
+          removePoiTypeGgSimilarItem (
             id: $id,
             input: $input
           ) {

@@ -3,6 +3,27 @@
     <header-top></header-top>
     <el-col :span="24">
       <div class="header-right" style="text-align: right;">
+        <div class="el-search el-col-5">
+          <div class="panelbody-box-search">
+            <el-input size="small" placeholder="Search"
+              v-model="form.q"
+              @keyup.enter.native="onSearch"
+              clearable
+              @clear="onReset()">
+              <template slot="prepend" @click="onSearch"><i class="el-icon-search"></i></template>
+            </el-input>
+          </div>
+
+          <!-- <div class="panelbody-box-search">
+            <el-autocomplete size="small" placeholder="Search..." :fetch-suggestions="onSearch" @select="onSearchChoose" :trigger-on-focus="false">
+               <template slot="prepend"><i class="el-icon-search"></i></template>
+               <template slot-scope="{ item }">
+                <div class="value">{{ item.id }}</div>
+                <span class="link">{{ item.name }}</span>
+              </template>
+            </el-autocomplete>
+          </div> -->
+        </div>
         <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
@@ -15,9 +36,6 @@
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
     </el-col>
-
-
-
   </el-row>
 </template>
 
@@ -28,7 +46,7 @@ import Pagination from '~/components/pagination.vue';
 import InfoItems from '~/components/info/items.vue';
 import ImportButton from '~/components/info/import.vue';
 import HeaderTop from '~/components/headertop.vue';
-
+const querystring = require('querystring');
 
 @Component({
   layout: 'main',
@@ -53,6 +71,15 @@ export default class PoiInfoPage extends Vue {
   onPageChange() { this.initData() }
 
   loading: boolean = false;
+  form: object = {};
+
+  async onSearch() {
+    this.query.page = 1;
+    const pageUrl = `?${querystring.stringify(this.form)}&${querystring.stringify(this.query)}`;
+    return this.$router.push(pageUrl);
+  }
+
+  onReset() { return this.$router.push('/info'); }
 
   head() {
     return {
@@ -66,33 +93,6 @@ export default class PoiInfoPage extends Vue {
       ]
     };
   }
-  data() {
-    return {
-      options: [
-        {
-          value: "5",
-          label: "5"
-        },
-        {
-          value: "10",
-          label: "10"
-        },
-        {
-          value: "20",
-          label: "20"
-        },
-        {
-          value: "50",
-          label: "50"
-        },
-        {
-          value: "100",
-          label: "100"
-        }
-      ],
-      value8: "20"
-    };
-  }
 
   created() { this.initData(); }
 
@@ -103,6 +103,9 @@ export default class PoiInfoPage extends Vue {
       limit: 300
     } })
     this.loading = false;
+    this.form = {
+      q: this.$route.query.q || ''
+    };
   }
 }
 </script>
