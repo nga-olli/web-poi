@@ -145,13 +145,17 @@ export default class PoiInfoPage extends Vue {
   font-size: 12px;
 }
 .address-content {
+  .el-collapse {
+    border: 0;
+    padding-bottom: 10px;
+  }
   .el-collapse-item__header {
     border: 0;
     background-color: transparent;
     color: #409EFF;
     font-weight: bold;
     font-size: 13px;
-    padding: 10px 0;
+    padding: 10px 0 0;
     height: auto;
     line-height: 25px;
     position: relative;
@@ -163,10 +167,11 @@ export default class PoiInfoPage extends Vue {
       color: #303133;
       font-weight: normal;
       padding-right: 20px;
+      margin-top: 0;
     }
   }
-  .el-collapse {
-    border: 0;
+  .el-collapse-item__content {
+    padding-bottom: 0;
   }
   .el-collapse-item__wrap {
     background-color: transparent;
