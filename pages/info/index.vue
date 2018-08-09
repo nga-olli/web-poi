@@ -107,7 +107,7 @@ export default class PoiInfoPage extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .page-info {
   .el-select-dropdown__wrap {
