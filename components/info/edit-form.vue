@@ -53,7 +53,8 @@ export default class EditForm extends Vue {
   @Prop() editFormState: boolean;
   @Prop() onClose: void;
 
-  @Action('infos/get_one') getInfo;
+  @Action('infos/get_one') getInfoAction;
+  @Action('infos/update') updateInfoAction;
   @State(state => state.regions.data) regions;
 
   loading: boolean = false;
@@ -70,7 +71,7 @@ export default class EditForm extends Vue {
 
   async onOpen() {
     let region = [];
-    const myPoiInfo = await this.getInfo({ id: this.itemId });
+    const myPoiInfo = await this.getInfoAction({ id: this.itemId });
     if (myPoiInfo.city !== null) region.push(myPoiInfo.city.id);
     if (myPoiInfo.district !== null) region.push(myPoiInfo.district.id);
     if (myPoiInfo.ward !== null) region.push(myPoiInfo.ward.id);
@@ -84,8 +85,11 @@ export default class EditForm extends Vue {
     };
   }
 
-  onSubmit() {
-    console.log(this.form)
+  async onSubmit() {
+    await this.updateInfoAction({
+      id: this.itemId,
+      input: this.form
+    });
   }
 }
 </script>

@@ -95,6 +95,42 @@ export const actions = {
     return typeof response.errors === "undefined" ? response.data.getPoiInfo : response.errors;
   },
 
+  async update({ commit }, { id, input }) {
+    const response = await this.$axios.$post("/", { query: `
+        mutation (
+          $id: Int!,
+          $input: JSON!
+        ) {
+          updatePoiInfo (
+            id: $id,
+            input: $input
+          ) {
+            type { id, name },
+            id,
+            name,
+            status,
+            similar,
+            number,
+            street,
+            ward { id, name},
+            district { id, name},
+            city { id, name},
+            lat,
+            lng,
+            website,
+            phoneNumber,
+            rating,
+            ggFullAddress,
+            dateCreated
+          }
+        }
+      `, variables: { id: id, input: input } });
+
+    return typeof response.errors === "undefined"
+      ? commit("UPDATE_DATA", response.data.updatePoiInfo)
+      : response.errors;
+  },
+
   async change_type({ commit }, { id, typeId }) {
     const response = await this.$axios.$post("/", {
       query: `
