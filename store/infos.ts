@@ -65,6 +65,36 @@ export const actions = {
     return typeof response.errors === "undefined" ? commit("SET_DATA", response.data.getPoiInfos) : response.errors;
   },
 
+  async get_one({ commit }, { id }) {
+    const response = await this.$axios.$post("/", {
+      query: `{
+        getPoiInfo (
+          id: ${id}
+        ) {
+          type { id, name },
+          id,
+          name,
+          status,
+          similar,
+          number,
+          street,
+          ward { id, name},
+          district { id, name},
+          city { id, name},
+          lat,
+          lng,
+          website,
+          phoneNumber,
+          rating,
+          ggFullAddress,
+          dateCreated
+        }
+      }`
+    });
+
+    return typeof response.errors === "undefined" ? response.data.getPoiInfo : response.errors;
+  },
+
   async change_type({ commit }, { id, typeId }) {
     const response = await this.$axios.$post("/", {
       query: `

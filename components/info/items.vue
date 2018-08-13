@@ -60,7 +60,7 @@
           <template slot-scope="scope">
             <small v-if="scope.row.ward !== null">{{ scope.row.ward.name }}</small>
             <div v-else>
-              <change-region-button :item="scope.row"></change-region-button>
+              <i class="el-icon-fa-times-circle text-danger"></i>
             </div>
           </template>
         </el-table-column>
@@ -81,10 +81,16 @@
           </template>
         </el-table-column>
       </el-table-column>
+      <el-table-column width="50">
+        <template slot-scope="scope">
+          <el-button type="primary" size="mini" icon="el-icon-edit" @click="onShowEditForm(scope.row.id)"  circle></el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <no-ssr>
       <scroll-top :duration="1000" :timing="'ease'"></scroll-top>
     </no-ssr>
+    <edit-form :editFormState="visible" :itemId="itemId" :onClose="onHideEditForm"></edit-form>
   </section>
 </template>
 
@@ -92,25 +98,35 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 import { Action } from 'vuex-class';
 import DeleteButton from '~/components/delete-button.vue';
-import ChangeRegionButton from '~/components/info/change-region-button.vue';
 import SelectType from '~/components/info/select-type.vue';
 import PublishButton from '~/components/info/publish-button.vue';
+import EditForm from '~/components/info/edit-form.vue';
 
 @Component({
   components: {
     DeleteButton,
-    ChangeRegionButton,
     SelectType,
-    PublishButton
+    PublishButton,
+    EditForm
   }
 })
 export default class InfoItems extends Vue {
   @Prop() infos: any[];
+
+  loading: boolean = false;
+  visible: boolean = false;
+  itemId: number = 0;
+
+  onShowEditForm(id) {
+    this.visible = !this.visible;
+    this.itemId = id;
+  }
+
+  onHideEditForm() { this.visible = false; }
 }
 </script>
 
 <style lang="scss" scoped>
-
   .similar-item {
     margin-right: 6px;
     margin-bottom: 6px;

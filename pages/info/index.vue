@@ -62,6 +62,7 @@ const querystring = require('querystring');
 export default class PoiInfoPage extends Vue {
   @Action('infos/get_all') listAction;
   @Action('entities/get_all') listEntitiesAction;
+  @Action('regions/get_trees') getTreesAction;
 
   @State(state => state.infos.data) infos;
   @State(state => state.infos.totalItems) totalItems;
@@ -102,6 +103,7 @@ export default class PoiInfoPage extends Vue {
     await this.listEntitiesAction({ query: {
       limit: 300
     } })
+    await this.getTreesAction();
     this.loading = false;
     this.form = {
       q: this.$route.query.q || ''
