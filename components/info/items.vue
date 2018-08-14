@@ -4,28 +4,20 @@
       <el-table-column label="Name" >
         <template slot-scope="scope">
           <div class="address-content">
-            <el-collapse  accordion>
-              <el-collapse-item  name="1">
-              <template slot="title">{{ scope.row.name }}<p class="full-address"><small>{{ scope.row.ggFullAddress }}</small></p></template>
-                <div class="showless">
-
-                  <p v-if="scope.row.website.length > 0">
-                    <i class="el-icon-fa-globe"></i> &nbsp;
-                    <small>{{ scope.row.website }}</small>
-                  </p>
-                  <p v-if="scope.row.phoneNumber.length > 0">
-                    <i class="el-icon-fa-phone"></i> &nbsp;
-                    <small>{{ scope.row.phoneNumber }}</small>
-                  </p>
-                  <p>
-                    <i class="el-icon-fa-compass"></i> &nbsp;
-                    <small>Lat: <strong>{{ scope.row.lat }}</strong></small>
-                    &nbsp;
-                    <small>Lng: <strong>{{ scope.row.lng }}</strong></small>
-                  </p>
-                </div>
-             </el-collapse-item>
-            </el-collapse>
+            <span class="title">
+              {{ scope.row.name }}
+            </span>
+            <span v-if="scope.row.website.length > 0" class="website">
+              <i class="el-icon-fa-globe"></i>
+              <small>{{ scope.row.website }}</small>
+            </span>
+            <span v-if="scope.row.phoneNumber.length > 0" class="phone">
+              <i class="el-icon-fa-phone"></i>
+              <small>{{ scope.row.phoneNumber }}</small>
+            </span>
+            <p class="full-address">
+              <small>{{ scope.row.ggFullAddress }}</small>
+            </p>
           </div>
         </template>
       </el-table-column>
@@ -90,7 +82,7 @@
     <no-ssr>
       <scroll-top :duration="1000" :timing="'ease'"></scroll-top>
     </no-ssr>
-    <edit-form :editFormState="visible" :itemId="itemId" :onClose="onHideEditForm"></edit-form>
+    <edit-form :editFormState="visible" :itemId="itemId" :hideEditForm="onHideEditForm"></edit-form>
   </section>
 </template>
 
@@ -118,7 +110,7 @@ export default class InfoItems extends Vue {
   itemId: number = 0;
 
   onShowEditForm(id) {
-    this.visible = !this.visible;
+    this.visible = true;
     this.itemId = id;
   }
 
@@ -127,32 +119,39 @@ export default class InfoItems extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .similar-item {
-    margin-right: 6px;
-    margin-bottom: 6px;
-    color: #333;
-    background-color: rgba(142, 243, 93, 0.1);
-    font-size: 12px;
+.similar-item {
+  margin-right: 6px;
+  margin-bottom: 6px;
+  color: #333;
+  background-color: rgba(142, 243, 93, 0.1);
+  font-size: 12px;
+}
+.address-content {
+  margin-top: 5px;
+  p {
+    margin-top: 3px;
+    margin-bottom: 3px;
   }
-  .address-content {
-    p {
-      margin-top: 3px;
-      margin-bottom: 3px;
-    }
-  }
-  .text-primary {
-    color: #0984e3;
-  }
-  .el-icon-fa-times-circle.text-danger {
-    color: #e74c3c;
-    cursor: pointer;
-  }
-  [class^="el-icon-fa-times-circle"], [class*=" el-icon-fa-times-circle"] {
-    font: normal normal normal 20px/1 FontAwesome !important;
-  }
-
-  .address-content .text-primary {
-    font-size: 13px;
-  }
-
+}
+.text-primary {
+  color: #0984e3;
+}
+.text-danger {
+  color: red;
+}
+.title {
+  color: #0984e3;
+  font-weight: 600;
+  margin-right: 5px;
+}
+.website,
+.phone {
+  margin-right: 15px;
+  font-weight: 300;
+}
+.el-icon-fa-globe,
+.el-icon-fa-phone {
+  font-size: 12px !important;
+  margin-right: 3px;
+}
 </style>

@@ -27,7 +27,7 @@ import { Action, State } from 'vuex-class';
 @Component({
   notifications: {
     importSuccess: {
-      icon: 'fas fa-exclamation-triangle',
+      icon: 'fas fa-check',
       position: 'bottomCenter',
       title: 'Upload success',
       toastOnce: true,
