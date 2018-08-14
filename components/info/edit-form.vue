@@ -5,7 +5,7 @@
     :before-close="hideEditForm"
     v-on:open="onOpen"
     v-on:close="onClose"
-    width="80%">
+    fullscreen>
     <template slot="title">
       <h3><i class="el-icon-fa-google"></i> {{ title }}</h3>
       <div class="map_mode">
@@ -16,7 +16,7 @@
       </div>
     </template>
     <el-row :gutter="30">
-      <el-col :md="15">
+      <el-col :md="16">
         <div class="intrinsic-container intrinsic-container-16x9">
           <iframe
             :src="frameUrl"
@@ -28,7 +28,7 @@
           </iframe>
         </div>
       </el-col>
-      <el-col :md="9">
+      <el-col :md="8">
         <el-form autoComplete="on" label-position="left" :model="form" ref="editForm">
           <el-form-item label="Name">
             <el-input type="text" size="small" v-model="form.name"></el-input>
@@ -176,7 +176,6 @@ export default class EditForm extends Vue {
       return;
     } else {
       this.updateSuccess({ message: `${this.form.name}` });
-      this.editFormState = false;
     }
   }
 }
