@@ -75,14 +75,13 @@
       </el-table-column>
       <el-table-column width="50">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click="onShowEditForm(scope.row.id)"  circle></el-button>
+          <edit-form :itemId="scope.row.id"></edit-form>
         </template>
       </el-table-column>
     </el-table>
     <no-ssr>
       <scroll-top :duration="1000" :timing="'ease'"></scroll-top>
     </no-ssr>
-    <edit-form :editFormState="visible" :itemId="itemId" :hideEditForm="onHideEditForm"></edit-form>
   </section>
 </template>
 
@@ -106,15 +105,7 @@ export default class InfoItems extends Vue {
   @Prop() infos: any[];
 
   loading: boolean = false;
-  visible: boolean = false;
   itemId: number = 0;
-
-  onShowEditForm(id) {
-    this.visible = true;
-    this.itemId = id;
-  }
-
-  onHideEditForm() { this.visible = false; }
 }
 </script>
 

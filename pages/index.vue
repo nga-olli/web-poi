@@ -24,7 +24,7 @@
             </el-autocomplete>
           </div> -->
         </div>
-        <el-button type="text" icon="el-icon-plus">Add entity</el-button>
+        <add-form></add-form>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
     </el-col>
@@ -46,6 +46,7 @@ import Pagination from "~/components/pagination.vue";
 import EntityItems from "~/components/entity/items.vue";
 import HeaderTop from "~/components/headertop.vue";
 const querystring = require('querystring');
+import AddForm from '~/components/entity/add-form.vue';
 
 @Component({
   layout: "main",
@@ -53,7 +54,8 @@ const querystring = require('querystring');
   components: {
     Pagination,
     EntityItems,
-    HeaderTop
+    HeaderTop,
+    AddForm
   }
 })
 export default class MainPage extends Vue {
@@ -108,7 +110,5 @@ export default class MainPage extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
 
 

@@ -105,8 +105,4 @@ export default class AddTagButton extends Vue {
     z-index: 99999999;
     top: 3px;
   }
-  .new-tag-input-wrapper input
-  {
-    text-align: center;
-  }
 </style>
