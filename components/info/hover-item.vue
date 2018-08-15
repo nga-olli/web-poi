@@ -9,6 +9,10 @@
         v-clipboard:copy="item.name">
         Name
       </el-button>
+      <el-button type="primary" plain size="small" v-show="isShow" icon="el-icon-fa-clipboard"
+        v-clipboard:copy="item.name + ' ' + item.ggFullAddress">
+        Both
+      </el-button>
     </el-button-group>
   </div>
 </template>
