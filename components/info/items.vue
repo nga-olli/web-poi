@@ -1,7 +1,7 @@
 <template>
   <section>
     <el-table :data="infos" style="width: 100%" row-key="id">
-      <el-table-column label="Name" >
+      <el-table-column label="Name" width="450">
         <template slot-scope="scope">
           <div class="address-content">
             <hover-item :item="scope.row"></hover-item>
@@ -22,17 +22,17 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Publish?" align="center" width="100">
+      <el-table-column label="Publish?" align="center" width="70">
         <template slot-scope="scope">
           <publish-button :id="scope.row.id" :status="scope.row.status"></publish-button>
         </template>
       </el-table-column>
-      <el-table-column label="Type" align="center" width="200">
+      <el-table-column label="Type" align="center" width="170">
         <template slot-scope="scope">
           <select-type :currentType="scope.row.type" :info="scope.row"></select-type>
         </template>
       </el-table-column>
-      <el-table-column label="Number" width="120" align="center">
+      <el-table-column label="Number" align="center">
         <template slot-scope="scope">
           <small v-if="scope.row.number.length > 0">{{ scope.row.number }}</small>
           <div v-else>
@@ -40,7 +40,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Street" width="140" align="center">
+      <el-table-column label="Street" align="center">
         <template slot-scope="scope">
           <small v-if="scope.row.street.length > 0">{{ scope.row.street }}</small>
           <div v-else>
@@ -48,7 +48,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Region" width="300" align="center">
+      <el-table-column label="Region" align="center">
         <el-table-column label="Ward" width="150" align="center">
           <template slot-scope="scope">
             <small v-if="scope.row.ward !== null">{{ scope.row.ward.name }}</small>
@@ -65,7 +65,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="City" width="150" align="center">
+        <el-table-column label="City" width="150" align="center" show-overflow-tooltip>
           <template slot-scope="scope">
             <small v-if="scope.row.city !== null">{{ scope.row.city.name }}</small>
             <div v-else>
