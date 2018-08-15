@@ -4,6 +4,7 @@
       <el-table-column label="Name" >
         <template slot-scope="scope">
           <div class="address-content">
+            <hover-item :item="scope.row"></hover-item>
             <span class="title">
               {{ scope.row.name }}
             </span>
@@ -92,13 +93,15 @@ import DeleteButton from '~/components/delete-button.vue';
 import SelectType from '~/components/info/select-type.vue';
 import PublishButton from '~/components/info/publish-button.vue';
 import EditForm from '~/components/info/edit-form.vue';
+import HoverItem from '~/components/info/hover-item.vue';
 
 @Component({
   components: {
     DeleteButton,
     SelectType,
     PublishButton,
-    EditForm
+    EditForm,
+    HoverItem
   }
 })
 export default class InfoItems extends Vue {

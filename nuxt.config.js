@@ -73,7 +73,8 @@ module.exports = {
     { src: "~plugins/fetch.ts" },
     { src: "~plugins/scrolltop.ts" },
     { src: "~plugins/notifications.ts" },
-    { src: "~plugins/tags-input.ts" }
+    { src: "~plugins/tags-input.ts" },
+    { src: "~plugins/clipboard.ts" }
   ],
   axios: {
     baseURL: process.env.GRAPHQL_ENDPOINT,
