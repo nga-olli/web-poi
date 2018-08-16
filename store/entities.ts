@@ -1,4 +1,5 @@
 export const state = () => ({
+  loading: false,
   data: [],
   query: {},
   formSource: {},
@@ -7,7 +8,14 @@ export const state = () => ({
 });
 
 export const mutations = {
+  LOAD_PENDING(state) {
+    state.loading = true;
+  },
+  LOAD_FAIL(state) {
+    state.loading = false;
+  },
   SET_DATA(state, response) {
+    state.loading = false;
     state.data = response.items || null;
     state.totalItems = response.meta.totalResults || 0;
     state.recordPerPage = response.meta.perPage || 20;
@@ -18,6 +26,7 @@ export const mutations = {
     state.data.splice(index, 1, response);
   },
   DELETE_DATA(state, id) {
+    state.loading = false;
     const index = state.data.findIndex(item => item.id === id);
     state.data.splice(index, 1);
     state.totalItems = state.totalItems - 1;
@@ -26,6 +35,8 @@ export const mutations = {
 
 export const actions = {
   async get_all({ commit }, { query }) {
+    commit("LOAD_PENDING");
+
     const response = await this.$axios.$post("/", {
       query: `{
         getPoiTypes (
@@ -53,9 +64,12 @@ export const actions = {
       }`
     });
 
-    return typeof response.errors === "undefined"
-      ? commit("SET_DATA", response.data.getPoiTypes)
-      : response.errors;
+    if (typeof response.errors === "undefined") {
+      return commit("SET_DATA", response.data.getPoiTypes);
+    } else {
+      commit('LOAD_FAIL');
+      return response.errors;
+    }
   },
 
   async suggest({ commit }, { keyword }) {

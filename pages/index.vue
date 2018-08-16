@@ -70,7 +70,6 @@ export default class MainPage extends Vue {
     this.initData();
   }
 
-  loading: boolean = false;
   form: object = {};
 
   head() {
@@ -99,9 +98,7 @@ export default class MainPage extends Vue {
   }
 
   async initData() {
-    this.loading = true;
     await this.listAction({ query: this.$route.query });
-    this.loading = false;
 
     this.form = {
       q: this.$route.query.q || ''

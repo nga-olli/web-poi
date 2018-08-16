@@ -1,6 +1,7 @@
 import FormData from 'form-data';
 
 export const state = () => ({
+  loading: false,
   data: [],
   query: {},
   formSource: {},
@@ -9,13 +10,21 @@ export const state = () => ({
 });
 
 export const mutations = {
+  LOAD_PENDING(state) {
+    state.loading = true;
+  },
+  LOAD_FAIL(state) {
+    state.loading = false;
+  },
   SET_DATA(state, response) {
+    state.loading = false;
     state.data = response.items || null;
     state.totalItems = response.meta.totalResults || 0;
     state.recordPerPage = response.meta.perPage || 30;
     state.query.page = response.meta.curPage || 1;
   },
   UPDATE_DATA(state, response) {
+    state.loading = false;
     const index = state.data.findIndex(item => item.id === response.id);
     state.data.splice(index, 1, response);
   }
@@ -23,8 +32,9 @@ export const mutations = {
 
 export const actions = {
   async get_all({ commit }, { query }) {
-    const response = await this.$axios.$post("/", {
-      query: `{
+    commit('LOAD_PENDING');
+
+    const response = await this.$axios.$post("/", { query: `{
         getPoiInfos (
           opts: {
           curPage: ${typeof query.page !== "undefined" ? query.page : 1},
@@ -50,6 +60,7 @@ export const actions = {
             rating,
             ggFullAddress,
             status,
+            notes { id },
             dateCreated
           },
           meta {
@@ -59,15 +70,18 @@ export const actions = {
             totalResults
           }
         }
-      }`
-    });
+      }` });
 
-    return typeof response.errors === "undefined" ? commit("SET_DATA", response.data.getPoiInfos) : response.errors;
+    if (typeof response.errors === "undefined") {
+      return commit("SET_DATA", response.data.getPoiInfos)
+    } else {
+      commit('LOAD_FAIL');
+      return response.errors;
+    }
   },
 
   async get_one({ commit }, { id }) {
-    const response = await this.$axios.$post("/", {
-      query: `{
+    const response = await this.$axios.$post("/", { query: `{
         getPoiInfo (
           id: ${id}
         ) {
@@ -87,10 +101,10 @@ export const actions = {
           phoneNumber,
           rating,
           ggFullAddress,
+          notes { id },
           dateCreated
         }
-      }`
-    });
+      }` });
 
     return typeof response.errors === "undefined" ? response.data.getPoiInfo : response.errors;
   },
@@ -121,6 +135,7 @@ export const actions = {
             phoneNumber,
             rating,
             ggFullAddress,
+            notes { id },
             dateCreated
           }
         }
@@ -132,8 +147,7 @@ export const actions = {
   },
 
   async change_type({ commit }, { id, typeId }) {
-    const response = await this.$axios.$post("/", {
-      query: `
+    const response = await this.$axios.$post("/", { query: `
         mutation (
           $id: Int!,
           $typeId: Int!
@@ -158,15 +172,11 @@ export const actions = {
             rating,
             ggFullAddress,
             status,
+            notes { id },
             dateCreated
           }
         }
-      `,
-      variables: {
-        id: parseInt(id),
-        typeId: parseInt(typeId)
-      }
-    });
+      `, variables: { id: parseInt(id), typeId: parseInt(typeId) } });
 
     return typeof response.errors === "undefined"
       ? commit("UPDATE_DATA", response.data.changePoiType)
@@ -241,6 +251,7 @@ export const actions = {
             rating,
             ggFullAddress,
             status,
+            notes { id },
             dateCreated
           }
         }

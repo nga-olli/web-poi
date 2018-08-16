@@ -56,7 +56,6 @@ const querystring = require('querystring');
     Pagination,
     InfoItems,
     ImportButton
-
   }
 })
 export default class PoiInfoPage extends Vue {
@@ -71,7 +70,6 @@ export default class PoiInfoPage extends Vue {
   @Watch('$route')
   onPageChange() { this.initData() }
 
-  loading: boolean = false;
   form: object = {};
 
   async onSearch() {
@@ -98,13 +96,11 @@ export default class PoiInfoPage extends Vue {
   created() { this.initData(); }
 
   async initData() {
-    this.loading = true;
     await this.listAction({ query: this.$route.query })
     await this.listEntitiesAction({ query: {
       limit: 300
     } })
     await this.getTreesAction();
-    this.loading = false;
     this.form = {
       q: this.$route.query.q || ''
     };

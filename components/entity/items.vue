@@ -1,6 +1,6 @@
 <template>
   <section>
-    <el-table :data="entities" style="width: 100%" row-key="id">
+    <el-table :data="entities" style="width: 100%" row-key="id" v-loading.fullscreen.lock="loading">
       <el-table-column label="Name" width="250"
         :show-overflow-tooltip="true" :default-sort = "{ order: 'descending' }" >
         <template slot-scope="scope">
@@ -57,7 +57,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator";
-import { Action } from 'vuex-class';
+import { Action, State } from 'vuex-class';
 import DeleteButton from "~/components/delete-button.vue";
 import AddTagButton from "~/components/entity/addtag-button.vue";
 import AddGgButton from "~/components/entity/addgg-button.vue";
@@ -73,27 +73,22 @@ export default class AdminUserItems extends Vue {
   @Prop() entities: any[];
   @Action('entities/remove_similar_item') removeSimilarItemAction;
   @Action('entities/remove_gg_similar_item') removeGgSimilarItemAction;
-
-  loading: boolean = false;
+  @State(state => state.entities.loading) loading;
 
   async onRemove(id, item) {
-    this.loading = true;
     await this.removeSimilarItemAction({
       id: id,
       similarItem: item
     });
-    this.loading = false;
 
     return;
   }
 
   async onRemoveGg(id, item) {
-    this.loading = true;
     await this.removeGgSimilarItemAction({
       id: id,
       similarItem: item
     });
-    this.loading = false;
 
     return;
   }

@@ -7,12 +7,6 @@ export const state = () => ({
 });
 
 export const mutations = {
-  SET_DATA(state, response) {
-    state.data = response.items || null;
-    state.totalItems = response.meta.totalResults || 0;
-    state.recordPerPage = response.meta.perPage || 20;
-    state.query.page = response.meta.curPage || 1;
-  },
   SET_TREES(state, response) {
     state.data = response || null;
   }

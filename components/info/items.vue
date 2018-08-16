@@ -1,6 +1,6 @@
 <template>
   <section>
-    <el-table :data="infos" style="width: 100%" row-key="id">
+    <el-table :data="infos" style="width: 100%" row-key="id" v-loading.fullscreen.lock="loading">
       <el-table-column label="Name" width="450">
         <template slot-scope="scope">
           <div class="address-content">
@@ -74,9 +74,13 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column width="50">
+      <el-table-column width="90">
         <template slot-scope="scope">
-          <edit-form :itemId="scope.row.id"></edit-form>
+          <edit-form :itemId="scope.row.id" style="display: inline;"></edit-form>
+          <note
+            :id="scope.row.id"
+            :hasNote="scope.row.notes.length > 0">
+          </note>
         </template>
       </el-table-column>
     </el-table>
@@ -88,12 +92,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
-import { Action } from 'vuex-class';
+import { State } from 'vuex-class';
 import DeleteButton from '~/components/delete-button.vue';
 import SelectType from '~/components/info/select-type.vue';
 import PublishButton from '~/components/info/publish-button.vue';
 import EditForm from '~/components/info/edit-form.vue';
 import HoverItem from '~/components/info/hover-item.vue';
+import Note from '~/components/info/note.vue';
 
 @Component({
   components: {
@@ -101,13 +106,14 @@ import HoverItem from '~/components/info/hover-item.vue';
     SelectType,
     PublishButton,
     EditForm,
-    HoverItem
+    HoverItem,
+    Note
   }
 })
 export default class InfoItems extends Vue {
   @Prop() infos: any[];
+  @State(state => state.infos.loading) loading;
 
-  loading: boolean = false;
   itemId: number = 0;
 }
 </script>
