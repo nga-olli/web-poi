@@ -77,10 +77,12 @@
       <el-table-column width="90">
         <template slot-scope="scope">
           <edit-form :itemId="scope.row.id" style="display: inline;"></edit-form>
-          <note
-            :id="scope.row.id"
-            :hasNote="scope.row.notes.length > 0">
-          </note>
+          <el-badge class="item" :value="scope.row.notes.length" :hidden="scope.row.notes.length === 0">
+            <note
+              :id="scope.row.id"
+              :hasNote="scope.row.notes.length > 0">
+            </note>
+          </el-badge>
         </template>
       </el-table-column>
     </el-table>

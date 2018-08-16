@@ -1,10 +1,10 @@
 <template>
   <el-popover
-    placement="left"
+    placement="left-start"
     trigger="manual"
     v-model="visible"
     width="500">
-    <el-row style="margin-bottom: 10px;">
+    <el-row>
       <el-col :span="20">
         <el-input
           type="textarea"
@@ -25,11 +25,16 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-table v-loading.lock="loading" :data="notes" width="100%">
-        <el-table-column label="Notes">
+      <el-table v-loading.lock="loading" :data="notes" width="100%" class="note-table">
+        <el-table-column :label="'Notes (' + notes.length + ')'">
           <template slot-scope="scope">
-            <small><i>{{ scope.row.dateCreated.readable }}</i></small> &nbsp;
-            {{ scope.row.text }}
+            <p class="note-text">{{ scope.row.text }}</p>
+            <small class="note-date">{{ scope.row.dateCreated.readable }}</small>
+          </template>
+        </el-table-column>
+        <el-table-column width="50">
+          <template slot-scope="scope">
+            <el-button type="text" icon="el-icon-fa-trash" class="note-del-button" @click="onDelete(scope.row.id)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -59,6 +64,13 @@ import { Action, State } from 'vuex-class';
       title: 'Note',
       toastOnce: true,
       type: 'success'
+    },
+    deleteSuccess: {
+      icon: 'fas fa-check',
+      position: 'bottomRight',
+      title: 'Note',
+      toastOnce: true,
+      type: 'success'
     }
   }
 })
@@ -67,6 +79,7 @@ export default class Note extends Vue {
   @Prop() hasNote: boolean;
   @Action('notes/add') addNoteAction;
   @Action('notes/get_all') getNotesAction;
+  @Action('notes/delete') deleteNoteAction;
   @State(state => state.notes.loading) loading;
   @State(state => state.notes.addLoading) addLoading;
   @State(state => state.notes.data) notes;
@@ -76,6 +89,7 @@ export default class Note extends Vue {
   note: string = '';
 
   addSuccess: ({ message: string, timeout: number }) => void;
+  deleteSuccess: ({ message: string, timeout: number }) => void;
 
   async onShow() {
     this.visible = !this.visible;
@@ -98,6 +112,17 @@ export default class Note extends Vue {
       })
     }
   }
+
+  async onDelete(id) {
+    const errors = await this.deleteNoteAction({ id: id });
+
+    if (typeof errors === 'undefined') {
+      this.deleteSuccess({
+        message: 'Deleted',
+        timeout: 1000
+      })
+    }
+  }
 }
 </script>
 
@@ -108,5 +133,22 @@ export default class Note extends Vue {
 }
 .add-button {
   margin: 10px 0 0 15px;
+}
+.note-text {
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+.note-table .el-table__row td {
+  border-bottom: none !important;
+  padding: 3px 0px !important;
+}
+.note-date {
+  color: #a2a2a2;
+}
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+  background-color: #ffff002e;
+}
+.note-del-button {
+  color: #ff000070;
 }
 </style>
