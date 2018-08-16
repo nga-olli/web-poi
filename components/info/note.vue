@@ -1,5 +1,6 @@
 <template>
   <el-popover
+    :key="id"
     placement="left-start"
     trigger="manual"
     v-model="visible"
@@ -34,7 +35,13 @@
         </el-table-column>
         <el-table-column width="50">
           <template slot-scope="scope">
-            <el-button type="text" icon="el-icon-fa-trash" class="note-del-button" @click="onDelete(scope.row.id)"></el-button>
+            <el-button
+              :loading="deleteLoading"
+              type="text"
+              icon="el-icon-fa-trash"
+              class="note-del-button"
+              @click="onDelete(scope.row.id)">
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -82,6 +89,7 @@ export default class Note extends Vue {
   @Action('notes/delete') deleteNoteAction;
   @State(state => state.notes.loading) loading;
   @State(state => state.notes.addLoading) addLoading;
+  @State(state => state.notes.deleteLoading) deleteLoading;
   @State(state => state.notes.data) notes;
 
   localLoading: boolean = false;

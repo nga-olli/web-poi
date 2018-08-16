@@ -1,6 +1,7 @@
 export const state = () => ({
   loading: false,
   addLoading: false,
+  deleteLoading: false,
   data: [],
   query: {},
   formSource: {},
