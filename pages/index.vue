@@ -9,7 +9,7 @@
               v-model="form.q"
               @keyup.enter.native="onSearch"
               clearable
-              @clear="onReset()">
+              @clear="onReset">
               <template slot="prepend" @click="onSearch"><i class="el-icon-search"></i></template>
             </el-input>
           </div>

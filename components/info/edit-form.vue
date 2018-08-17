@@ -9,7 +9,7 @@
       top="0"
       close-on-press-escape
       lock-scroll
-      width="40%">
+      width="35%">
       <template slot="title">
         <h3><i class="el-icon-fa-google"></i> {{ title }}</h3>
         <!-- <div class="map_mode">
@@ -37,18 +37,31 @@
             <el-form-item label="Name">
               <el-input type="text" size="small" v-model="form.name"></el-input>
             </el-form-item>
-            <el-form-item label="Number">
-              <el-input type="text" size="small" v-model="form.number"></el-input>
-            </el-form-item>
-            <el-form-item label="Street">
-              <el-input type="text" size="small" v-model="form.street"></el-input>
-            </el-form-item>
-            <el-form-item label="Phone">
-              <el-input type="text" size="small" v-model="form.phoneNumber"></el-input>
-            </el-form-item>
-            <el-form-item label="Website">
-              <el-input type="text" size="small" v-model="form.website"></el-input>
-            </el-form-item>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Number">
+                  <el-input type="text" size="small" v-model="form.number"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="16">
+                <el-form-item label="Street">
+                  <el-input type="text" size="small" v-model="form.street"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <el-form-item label="Phone">
+                  <el-input type="text" size="small" v-model="form.phoneNumber"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="16">
+                <el-form-item label="Website">
+                  <el-input type="text" size="small" v-model="form.website"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+
             <el-form-item prop="status" label="City / District / Ward">
               <el-cascader
                 placeholder="Try searching: Hà Nội, Quận 1, Thị xã Rạch Giá, Phường Đông Hồ, ..."
