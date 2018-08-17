@@ -184,7 +184,7 @@ export default class PoiInfoPage extends Vue {
     vertical-align: top;
   }
   .el-table--enable-row-hover .el-table__body tr:hover>td {
-    background-color: rgba(0, 161, 255, 0.03);
+    background-color: rgba(0, 119, 243, 0.04);
   }
 }
 

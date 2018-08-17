@@ -14,9 +14,6 @@
     <el-button v-show="myFiles.length > 0" :loading="loading" style="margin-left: 10px;" size="mini" icon="el-icon-fa-upload" type="success" @click="onUpload">
       Import
     </el-button>
-    <div class="el-upload__tip" slot="tip">
-      &nbsp; Only <code>.xlsx</code> is allowed
-    </div>
   </el-upload>
 </template>
 

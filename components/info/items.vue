@@ -8,15 +8,18 @@
             <span class="title">
               {{ scope.row.name }}
             </span>
-            <span v-if="scope.row.website.length > 0" class="website">
-              <i class="el-icon-fa-globe"></i>
-              <small>{{ scope.row.website }}</small>
-            </span>
-            <span v-if="scope.row.phoneNumber.length > 0" class="phone">
-              <i class="el-icon-fa-phone"></i>
-              <small>{{ scope.row.phoneNumber }}</small>
-            </span>
+            <p class="website-phone">
+              <span v-if="scope.row.website.length > 0" class="website">
+                <i class="el-icon-fa-globe"></i>
+                <small>{{ scope.row.website }}</small>
+              </span>
+              <span v-if="scope.row.phoneNumber.length > 0" class="phone">
+                <i class="el-icon-fa-phone"></i>
+                <small>{{ scope.row.phoneNumber }}</small>
+              </span>
+            </p>
             <p class="full-address">
+              <i class="el-icon-fa-google text-danger"></i>
               <small>{{ scope.row.ggFullAddress }}</small>
             </p>
           </div>
@@ -131,6 +134,9 @@ export default class InfoItems extends Vue {
   p {
     margin-top: 3px;
     margin-bottom: 3px;
+    .website-phone {
+      font-size: 11px;
+    }
   }
 }
 .text-primary {
@@ -150,7 +156,8 @@ export default class InfoItems extends Vue {
   font-weight: 300;
 }
 .el-icon-fa-globe,
-.el-icon-fa-phone {
+.el-icon-fa-phone,
+.el-icon-fa-google {
   font-size: 12px !important;
   margin-right: 3px;
 }
