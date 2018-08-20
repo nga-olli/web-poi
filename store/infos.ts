@@ -2,7 +2,9 @@ import FormData from 'form-data';
 
 export const state = () => ({
   loading: false,
+  flagSelect: false,
   data: [],
+  filterSearch: [],
   query: {},
   formSource: {},
   totalItems: 0,
@@ -27,6 +29,13 @@ export const mutations = {
     state.loading = false;
     const index = state.data.findIndex(item => item.id === response.id);
     state.data.splice(index, 1, response);
+  },
+
+  ADDTAG_FILTER (state, text) {
+    state.filterSearch.push({ text })
+  },
+  REMOVE_FILTER (state, todo) {
+    state.filterSearch.splice(state.todos.indexOf(todo), 1)
   }
 };
 

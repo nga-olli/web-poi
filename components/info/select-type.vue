@@ -42,7 +42,7 @@ export default class SelectType extends Vue {
   created() {
     if (this.currentType !== null) {
       this.selected = this.currentType.id;
-    }
+      }
   }
 
   _truncate(str) {

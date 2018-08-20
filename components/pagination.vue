@@ -85,7 +85,7 @@ export default class Pagination extends Vue {
   margin-left: 20px;
   background-color: #fff;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 15px;
 
   .text {
     margin-left: 10px;

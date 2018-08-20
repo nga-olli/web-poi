@@ -3,7 +3,7 @@
     <header-top></header-top>
     <el-col :span="24">
       <div class="header-right" style="text-align: right;">
-        <div class="el-search el-col-5">
+        <!-- <div class="el-search el-col-5">
           <div class="panelbody-box-search">
             <el-input size="small" placeholder="Search"
               v-model="form.q"
@@ -14,7 +14,7 @@
             </el-input>
           </div>
 
-          <!-- <div class="panelbody-box-search">
+          <div class="panelbody-box-search">
             <el-autocomplete size="small" placeholder="Search..." :fetch-suggestions="onSearch" @select="onSearchChoose" :trigger-on-focus="false">
                <template slot="prepend"><i class="el-icon-search"></i></template>
                <template slot-scope="{ item }">
@@ -22,8 +22,9 @@
                 <span class="link">{{ item.name }}</span>
               </template>
             </el-autocomplete>
-          </div> -->
-        </div>
+          </div>
+        </div> --> 
+        <filter-search></filter-search>
         <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
       </div>
@@ -46,6 +47,7 @@ import Pagination from '~/components/pagination.vue';
 import InfoItems from '~/components/info/items.vue';
 import ImportButton from '~/components/info/import.vue';
 import HeaderTop from '~/components/headertop.vue';
+import FilterSearch from '~/components/info/filter-search.vue';
 const querystring = require('querystring');
 
 @Component({
@@ -55,7 +57,8 @@ const querystring = require('querystring');
     HeaderTop,
     Pagination,
     InfoItems,
-    ImportButton
+    ImportButton,
+    FilterSearch
   }
 })
 export default class PoiInfoPage extends Vue {

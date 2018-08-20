@@ -106,6 +106,8 @@ export default class Sidebar extends Vue {
         background: #409eff;
         border-color: #409eff;
         color: #fff;
+        -webkit-transition: 0.3s ease-out;
+        -moz-transition: 0.3s ease-out;
         transition: 0.3s ease-out;
         span {
           display: inline-block;
