@@ -1,12 +1,13 @@
 <template>
   <div class="filter-search">
     <div class="el-search">
-      <el-select v-model="selected" placeholder="Filter">
+      <el-select v-model="selected" placeholder="Filter" @change="addFilterTag()">
         <el-option
-          v-for="item in options"
+          v-for="item in optionFilter"
           :key="item.value"
           :label="item.label"
-          :value="item.value">
+          :value="item.value"
+          :hide-selected="true">
         </el-option>
       </el-select>
       <div class="panelbody-box-search">
@@ -15,65 +16,51 @@
         </el-input>
       </div>
     </div>
+    <br>
+    <span>Data: {{ selected }}</span>
 
     <div class="tag-filter">
       <el-tag
-        v-for="tag in tags"
-        :key="tag.name"
-        closable
-        :type="tag.type">
-        {{tag.name}}
+        v-for="tag in tagFilter"
+        :key="tag"
+        closable @close="handleClose(tag)">
+        {{ tag.value }}
       </el-tag>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
+import { Vue, Component, Prop } from "nuxt-property-decorator";
+import { Action, State } from "vuex-class";
 
 @Component
 export default class FilterSearch extends Vue {
- 
-  data() {
-    return {
-      options: [{
-          value: 'Option1',
-          label: 'Option1',
-          selected: true,
-        }, {
-          value: 'Option2',
-          label: 'Option2',
-          selected: true,
-        }, {
-          value: 'Option3',
-          label: 'Option3',
-          selected: true,
-        }, {
-          value: 'Option4',
-          label: 'Option4',
-          selected: true,
-        }, {
-          value: 'Option5',
-          label: 'Option5',
-          selected: true,
-        }],
-        value: '',
-      tags: [
-        { name: 'Tag 1', type: '' },
-        { name: 'Tag 2', type: '' },
-        { name: 'Tag 3', type: '' },
-        { name: 'Tag 4', type: '' },
-        { name: 'Tag 5', type: '' }
-      ]
-    }
+  @Prop() infos: any[];
+  @Action("infos/add_filter_tag") addFilterTagAction;
+  @State(state => state.infos.optionFilter)
+  dataFilter;
+  @State(state => state.infos.optionFilter)
+  tagsFilters;
+
+  selected: string = "Filter";
+
+  addFilterTag() {
+    this.addFilterTagAction(this.selected);
   }
 
+  changeData() {}
 
+  get optionFilter() {
+    return this.dataFilter;
+  }
+  get tagFilter() {
+    return this.tagsFilters;
+  }
 }
 </script>
 
 <style lang="scss">
-
 @mixin displayFlex() {
   display: -webkit-flex;
   display: flex;
@@ -124,9 +111,7 @@ export default class FilterSearch extends Vue {
       margin-right: 10px;
     }
   }
-
 }
-
 </style>
 
 

@@ -1,14 +1,41 @@
-import FormData from 'form-data';
+import FormData from "form-data";
 
 export const state = () => ({
   loading: false,
   flagSelect: false,
   data: [],
-  filterSearch: [],
   query: {},
   formSource: {},
   totalItems: 0,
-  recordPerPage: 0
+  recordPerPage: 0,
+  tagsFilter: [],
+  optionFilter: [
+    {
+      value: "Option1",
+      label: "Option1",
+      flag: true
+    },
+    {
+      value: "Option2",
+      label: "Option2",
+      flag: true
+    },
+    {
+      value: "Option3",
+      label: "Option3",
+      flag: true
+    },
+    {
+      value: "Option4",
+      label: "Option4",
+      flag: true
+    },
+    {
+      value: "Option5",
+      label: "Option5",
+      flag: true
+    }
+  ]
 });
 
 export const mutations = {
@@ -31,19 +58,17 @@ export const mutations = {
     state.data.splice(index, 1, response);
   },
 
-  ADDTAG_FILTER (state, text) {
-    state.filterSearch.push({ text })
-  },
-  REMOVE_FILTER (state, todo) {
-    state.filterSearch.splice(state.todos.indexOf(todo), 1)
+  ADD_FILTER_TAG(state, selected) {
+    state.tagsFilter.push({ selected });
   }
 };
 
 export const actions = {
   async get_all({ commit }, { query }) {
-    commit('LOAD_PENDING');
+    commit("LOAD_PENDING");
 
-    const response = await this.$axios.$post("/", { query: `{
+    const response = await this.$axios.$post("/", {
+      query: `{
         getPoiInfos (
           opts: {
           curPage: ${typeof query.page !== "undefined" ? query.page : 1},
@@ -79,18 +104,20 @@ export const actions = {
             totalResults
           }
         }
-      }` });
+      }`
+    });
 
     if (typeof response.errors === "undefined") {
-      return commit("SET_DATA", response.data.getPoiInfos)
+      return commit("SET_DATA", response.data.getPoiInfos);
     } else {
-      commit('LOAD_FAIL');
+      commit("LOAD_FAIL");
       return response.errors;
     }
   },
 
   async get_one({ commit }, { id }) {
-    const response = await this.$axios.$post("/", { query: `{
+    const response = await this.$axios.$post("/", {
+      query: `{
         getPoiInfo (
           id: ${id}
         ) {
@@ -113,13 +140,15 @@ export const actions = {
           notes { id },
           dateCreated
         }
-      }` });
+      }`
+    });
 
     return typeof response.errors === "undefined" ? response.data.getPoiInfo : response.errors;
   },
 
   async update({ commit }, { id, input }) {
-    const response = await this.$axios.$post("/", { query: `
+    const response = await this.$axios.$post("/", {
+      query: `
         mutation (
           $id: Int!,
           $input: JSON!
@@ -148,7 +177,9 @@ export const actions = {
             dateCreated
           }
         }
-      `, variables: { id: id, input: input } });
+      `,
+      variables: { id: id, input: input }
+    });
 
     return typeof response.errors === "undefined"
       ? commit("UPDATE_DATA", response.data.updatePoiInfo)
@@ -156,7 +187,8 @@ export const actions = {
   },
 
   async change_type({ commit }, { id, typeId }) {
-    const response = await this.$axios.$post("/", { query: `
+    const response = await this.$axios.$post("/", {
+      query: `
         mutation (
           $id: Int!,
           $typeId: Int!
@@ -185,7 +217,9 @@ export const actions = {
             dateCreated
           }
         }
-      `, variables: { id: parseInt(id), typeId: parseInt(typeId) } });
+      `,
+      variables: { id: parseInt(id), typeId: parseInt(typeId) }
+    });
 
     return typeof response.errors === "undefined"
       ? commit("UPDATE_DATA", response.data.changePoiType)
@@ -202,17 +236,16 @@ export const actions = {
           variables: {
             file: null
           }
-        }
+        };
 
         const map = {
-          '0': ['variables.file']
-        }
+          "0": ["variables.file"]
+        };
 
         let fd = new FormData();
-        fd.append('operations', JSON.stringify(o))
-        fd.append('map', JSON.stringify(map))
+        fd.append("operations", JSON.stringify(o));
+        fd.append("map", JSON.stringify(map));
         fd.append(0, file.raw, file.raw.name);
-
 
         const response = await this.$axios.post("/", fd);
 
@@ -235,7 +268,8 @@ export const actions = {
         break;
     }
 
-    const response = await this.$axios.$post("/", { query: `
+    const response = await this.$axios.$post("/", {
+      query: `
         mutation (
           $id: Int!,
           $status: Int!
@@ -264,8 +298,14 @@ export const actions = {
             dateCreated
           }
         }
-      `, variables: { id: parseInt(id), status: status } });
+      `,
+      variables: { id: parseInt(id), status: status }
+    });
 
     return typeof response.errors === "undefined" ? commit("UPDATE_DATA", response.data.changeStatus) : response.errors;
+  },
+
+  add_filter_tag({ commit }, flag) {
+    return commit("ADD_FILTER_TAG", flag);
   }
 };
