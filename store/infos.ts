@@ -59,7 +59,12 @@ export const mutations = {
   },
 
   ADD_FILTER_TAG(state, selected) {
-    state.tagsFilter.push({ selected });
+    const index = state.optionFilter.findIndex(item => item.id === selected.id);
+    state.optionFilter.splice(index, 1);
+  },
+  ADD_FILTER_OPTION(state, selected) {
+    const index = state.tagsFilter.findIndex(item => item.id === selected.id);
+    state.tagsFilter.slice(index, 1);
   }
 };
 
@@ -305,7 +310,10 @@ export const actions = {
     return typeof response.errors === "undefined" ? commit("UPDATE_DATA", response.data.changeStatus) : response.errors;
   },
 
-  add_filter_tag({ commit }, flag) {
-    return commit("ADD_FILTER_TAG", flag);
+  add_filter_tag({ commit }, selected) {
+    return commit("ADD_FILTER_TAG", selected);
+  },
+  add_filter_option({ commit }, selected) {
+    return commit("ADD_FILTER_OPTION", selected);
   }
 };

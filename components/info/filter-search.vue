@@ -3,7 +3,7 @@
     <div class="el-search">
       <el-select v-model="selected" placeholder="Filter" @change="addFilterTag()">
         <el-option
-          v-for="item in optionFilter"
+          v-for="item in dataFilter"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -22,8 +22,9 @@
     <div class="tag-filter">
       <el-tag
         v-for="tag in tagFilter"
-        :key="tag"
-        closable @close="handleClose(tag)">
+        :key="tag.value"
+        :label="tag.lable"
+        closable @change="addFilterOption()">
         {{ tag.value }}
       </el-tag>
     </div>
@@ -38,6 +39,7 @@ import { Action, State } from "vuex-class";
 export default class FilterSearch extends Vue {
   @Prop() infos: any[];
   @Action("infos/add_filter_tag") addFilterTagAction;
+  @Action("infos/add_filter_option") addFilterOptionAction;
   @State(state => state.infos.optionFilter)
   dataFilter;
   @State(state => state.infos.optionFilter)
@@ -49,7 +51,13 @@ export default class FilterSearch extends Vue {
     this.addFilterTagAction(this.selected);
   }
 
-  changeData() {}
+  addFilterOption() {
+    this.addFilterOptionAction(this.selected);
+  }
+
+  handleChange(value) {
+    console.log(`selected ${value}`);
+  }
 
   get optionFilter() {
     return this.dataFilter;
