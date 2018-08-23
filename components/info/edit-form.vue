@@ -86,55 +86,56 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator';
-import { Action, State } from 'vuex-class';
+import { Vue, Component, Prop } from "nuxt-property-decorator";
+import { Action, State } from "vuex-class";
 
 @Component({
   notifications: {
     updateError: {
-      icon: 'fas fa-exclamation-triangle',
-      position: 'topRight',
-      title: 'Update',
+      icon: "fas fa-exclamation-triangle",
+      position: "topRight",
+      title: "Update",
       toastOnce: true,
-      type: 'error'
+      type: "error"
     },
     updateSuccess: {
-      icon: 'fas fa-check',
-      position: 'topRight',
-      title: 'Update',
+      icon: "fas fa-check",
+      position: "topRight",
+      title: "Update",
       toastOnce: true,
-      type: 'success'
+      type: "success"
     }
   }
 })
 export default class EditForm extends Vue {
   @Prop() itemId: number;
 
-  @Action('infos/get_one') getInfoAction;
-  @Action('infos/update') updateInfoAction;
-  @State(state => state.regions.data) regions;
+  @Action("infos/get_one") getInfoAction;
+  @Action("infos/update") updateInfoAction;
+  @State(state => state.regions.data)
+  regions;
 
   visible: boolean = false;
-  mapMode: string = 'place';
-  title: string = '';
-  frameUrl: string = '';
+  mapMode: string = "place";
+  title: string = "";
+  frameUrl: string = "";
   loading: boolean = false;
   form: any = {};
   config: object = {
     label: "name",
     value: "id",
     children: "children"
-  }
+  };
 
   $refs: {
-    editForm: HTMLFormElement,
+    editForm: HTMLFormElement;
     // mapFrame: HTMLFormElement
-  }
+  };
 
   updateSuccess: ({ message: string, timeout: number }) => void;
   updateError: ({ message: string, timeout: number }) => void;
 
-  // onChangeMode() {
+  // onMode() {
   //   switch (this.mapMode) {
   //     case 'place':
   //       this.frameUrl = 'https://www.google.com/maps/embed/v1/place?key=' + process.env.GOOGLE_API_KEY
@@ -173,7 +174,7 @@ export default class EditForm extends Vue {
   }
 
   onClose() {
-    this.mapMode = 'place';
+    this.mapMode = "place";
     this.form = {};
     this.visible = false;
   }
@@ -190,14 +191,14 @@ export default class EditForm extends Vue {
       input: this.form
     });
 
-    if (typeof errors !== 'undefined') {
+    if (typeof errors !== "undefined") {
       this.loading = false;
       errors.map(err => {
         this.updateError({
           message: err.message,
           timeout: 5000
         });
-      })
+      });
 
       return;
     } else {
@@ -221,7 +222,7 @@ iframe {
   height: 0;
   overflow: hidden;
   width: 100%;
-  padding: 8px
+  padding: 8px;
 }
 
 /* 16x9 Aspect Ratio */
@@ -236,7 +237,7 @@ iframe {
 
 .intrinsic-container iframe {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;

@@ -3,7 +3,7 @@
     <header-top></header-top>
     <el-col :span="24">
       <div class="header-right" style="text-align: right;">
-        <!-- <div class="el-search el-col-5">
+       <div class="el-search el-col-5">
           <div class="panelbody-box-search">
             <el-input size="small" placeholder="Search"
               v-model="form.q"
@@ -14,7 +14,7 @@
             </el-input>
           </div>
 
-          <div class="panelbody-box-search">
+          <!-- <div class="panelbody-box-search">
             <el-autocomplete size="small" placeholder="Search..." :fetch-suggestions="onSearch" @select="onSearchChoose" :trigger-on-focus="false">
                <template slot="prepend"><i class="el-icon-search"></i></template>
                <template slot-scope="{ item }">
@@ -22,8 +22,8 @@
                 <span class="link">{{ item.name }}</span>
               </template>
             </el-autocomplete>
-          </div>
-        </div> --> 
+          </div> -->
+        </div>
         <filter-search></filter-search>
         <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
@@ -41,18 +41,18 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'nuxt-property-decorator';
-import { Action, State } from 'vuex-class';
-import Pagination from '~/components/pagination.vue';
-import InfoItems from '~/components/info/items.vue';
-import ImportButton from '~/components/info/import.vue';
-import HeaderTop from '~/components/headertop.vue';
-import FilterSearch from '~/components/info/filter-search.vue';
-const querystring = require('querystring');
+import { Vue, Component, Watch } from "nuxt-property-decorator";
+import { Action, State } from "vuex-class";
+import Pagination from "~/components/pagination.vue";
+import InfoItems from "~/components/info/items.vue";
+import ImportButton from "~/components/info/import.vue";
+import HeaderTop from "~/components/headertop.vue";
+import FilterSearch from "~/components/info/filter-search.vue";
+const querystring = require("querystring");
 
 @Component({
-  layout: 'main',
-  middleware: ['authenticated'],
+  layout: "main",
+  middleware: ["authenticated"],
   components: {
     HeaderTop,
     Pagination,
@@ -62,16 +62,22 @@ const querystring = require('querystring');
   }
 })
 export default class PoiInfoPage extends Vue {
-  @Action('infos/get_all') listAction;
-  @Action('entities/get_all') listEntitiesAction;
-  @Action('regions/get_trees') getTreesAction;
+  @Action("infos/get_all") listAction;
+  @Action("entities/get_all") listEntitiesAction;
+  @Action("regions/get_trees") getTreesAction;
 
-  @State(state => state.infos.data) infos;
-  @State(state => state.infos.totalItems) totalItems;
-  @State(state => state.infos.recordPerPage) recordPerPage;
-  @State(state => state.infos.query) query;
-  @Watch('$route')
-  onPageChange() { this.initData() }
+  @State(state => state.infos.data)
+  infos;
+  @State(state => state.infos.totalItems)
+  totalItems;
+  @State(state => state.infos.recordPerPage)
+  recordPerPage;
+  @State(state => state.infos.query)
+  query;
+  @Watch("$route")
+  onPageChange() {
+    this.initData();
+  }
 
   form: object = {};
 
@@ -81,38 +87,43 @@ export default class PoiInfoPage extends Vue {
     return this.$router.push(pageUrl);
   }
 
-  onReset() { return this.$router.push('/info'); }
+  onReset() {
+    return this.$router.push("/info");
+  }
 
   head() {
     return {
-      title: 'Information',
+      title: "Information",
       meta: [
         {
-          hid: 'description',
-          name: 'description',
-          content: 'Information'
+          hid: "description",
+          name: "description",
+          content: "Information"
         }
       ]
     };
   }
 
-  created() { this.initData(); }
+  created() {
+    this.initData();
+  }
 
   async initData() {
-    await this.listAction({ query: this.$route.query })
-    await this.listEntitiesAction({ query: {
-      limit: 300
-    } })
+    await this.listAction({ query: this.$route.query });
+    await this.listEntitiesAction({
+      query: {
+        limit: 300
+      }
+    });
     await this.getTreesAction();
     this.form = {
-      q: this.$route.query.q || ''
+      q: this.$route.query.q || ""
     };
   }
 }
 </script>
 
 <style lang="scss">
-
 .page-info {
   .el-select-dropdown__wrap {
     max-height: none;
@@ -137,10 +148,10 @@ export default class PoiInfoPage extends Vue {
     font-weight: normal;
     font-size: 13px;
   }
-  .el-table .el-table__row  td {
+  .el-table .el-table__row td {
     padding: 0;
   }
-  .el-table .el-table__row  td.is-center{
+  .el-table .el-table__row td.is-center {
     // vertical-align: top;
     // padding-top: 10px;
   }
@@ -157,7 +168,7 @@ export default class PoiInfoPage extends Vue {
     .el-collapse-item__header {
       border: 0;
       background-color: transparent;
-      color: #409EFF;
+      color: #409eff;
       font-weight: bold;
       font-size: 13px;
       padding: 8px 0 0;
@@ -183,12 +194,11 @@ export default class PoiInfoPage extends Vue {
       border: 0;
     }
   }
-  .address-content .el-collapse-item.is-active + .el-table .el-table__row  td.is-center {
+  .address-content .el-collapse-item.is-active + .el-table .el-table__row td.is-center {
     vertical-align: top;
   }
-  .el-table--enable-row-hover .el-table__body tr:hover>td {
+  .el-table--enable-row-hover .el-table__body tr:hover > td {
     background-color: rgba(0, 119, 243, 0.04);
   }
 }
-
 </style>
