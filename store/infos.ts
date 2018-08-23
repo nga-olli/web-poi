@@ -8,31 +8,30 @@ export const state = () => ({
   formSource: {},
   totalItems: 0,
   recordPerPage: 0,
-  tagsFilter: [],
   optionFilter: [
     {
-      value: "Option1",
-      label: "Option1",
+      value: "Name",
+      label: "Name",
       flag: true
     },
     {
-      value: "Option2",
-      label: "Option2",
+      value: "Type",
+      label: "Type",
       flag: true
     },
     {
-      value: "Option3",
-      label: "Option3",
+      value: "Street",
+      label: "Street",
       flag: true
     },
     {
-      value: "Option4",
-      label: "Option4",
+      value: "Ward",
+      label: "Ward",
       flag: true
     },
     {
-      value: "Option5",
-      label: "Option5",
+      value: "City",
+      label: "City",
       flag: true
     }
   ]
@@ -59,12 +58,14 @@ export const mutations = {
   },
 
   ADD_FILTER_TAG(state, selected) {
-    const index = state.optionFilter.findIndex(item => item.id === selected.id);
-    state.optionFilter.splice(index, 1);
+    state.optionFilter.forEach(item => {
+      if (item.value === selected) item.flag = false;
+    });
   },
-  ADD_FILTER_OPTION(state, selected) {
-    const index = state.tagsFilter.findIndex(item => item.id === selected.id);
-    state.tagsFilter.slice(index, 1);
+  ADD_FILTER_OPTION(state, tag) {
+    state.optionFilter.forEach(item => {
+      if (item.value === tag.value) item.flag = true;
+    });
   }
 };
 
@@ -313,7 +314,7 @@ export const actions = {
   add_filter_tag({ commit }, selected) {
     return commit("ADD_FILTER_TAG", selected);
   },
-  add_filter_option({ commit }, selected) {
-    return commit("ADD_FILTER_OPTION", selected);
+  add_filter_option({ commit }, tag) {
+    return commit("ADD_FILTER_OPTION", tag);
   }
 };

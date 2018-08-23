@@ -1,12 +1,13 @@
 <template>
   <div class="filter-search">
     <div class="el-search">
-      <el-select v-model="selected" placeholder="Filter" @change="addFilterTag()">
+      <el-select v-model="selected" placeholder="Filter" @change="changeFilterTag()" value="Filter" >
         <el-option
-          v-for="item in dataFilter"
-          :key="item.value"
+          v-for="(item,index) in dataFilter"
+          :key="index"
           :label="item.label"
           :value="item.value"
+          v-if="item.flag === true"
           :hide-selected="true">
         </el-option>
       </el-select>
@@ -16,15 +17,13 @@
         </el-input>
       </div>
     </div>
-    <br>
-    <span>Data: {{ selected }}</span>
-
     <div class="tag-filter">
       <el-tag
-        v-for="tag in tagFilter"
-        :key="tag.value"
+        v-for="(tag,index) in tagFilter"
+        :key="index"
         :label="tag.lable"
-        closable @change="addFilterOption()">
+        v-if="tag.flag === false"
+        closable @close="changeFilterOption(tag)">
         {{ tag.value }}
       </el-tag>
     </div>
@@ -47,18 +46,13 @@ export default class FilterSearch extends Vue {
 
   selected: string = "Filter";
 
-  addFilterTag() {
+  changeFilterTag() {
     this.addFilterTagAction(this.selected);
   }
 
-  addFilterOption() {
-    this.addFilterOptionAction(this.selected);
+  changeFilterOption(tag) {
+    this.addFilterOptionAction(tag);
   }
-
-  handleChange(value) {
-    console.log(`selected ${value}`);
-  }
-
   get optionFilter() {
     return this.dataFilter;
   }
