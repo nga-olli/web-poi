@@ -21,6 +21,9 @@ export const mutations = {
     state.recordPerPage = response.meta.perPage || 20;
     state.query.page = response.meta.curPage || 1;
   },
+  ADD_DATA(state, response) {
+    state.data.push(response);
+  },
   UPDATE_DATA(state, response) {
     const index = state.data.findIndex(item => item.id === response.id);
     state.data.splice(index, 1, response);
@@ -213,6 +216,30 @@ export const actions = {
 
     return typeof response.errors === "undefined"
       ? commit("UPDATE_DATA", response.data.removePoiTypeGgSimilarItem)
+      : response.errors;
+  },
+
+  async add({ commit }, { input }) {
+    const response = await this.$axios.$post("/", {
+      query: `
+        mutation (
+          $input: JSON!
+        ) {
+          addPoiType (
+            input: $input
+          ) {
+            id,
+            name,
+            similar,
+            ggSimilar,
+            dateCreated
+          }
+        }
+      `, variables: { input: input }
+    });
+
+    return typeof response.errors === "undefined"
+      ? commit("ADD_DATA", response.data.addPoiType)
       : response.errors;
   },
 
