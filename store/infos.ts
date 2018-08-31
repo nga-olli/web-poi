@@ -34,14 +34,16 @@ export const actions = {
   async get_all({ commit }, { query }) {
     commit('LOAD_PENDING');
 
-    const response = await this.$axios.$post("/", { query: `{
+    const response = await this.$axios.$post("/", {
+      query: `{
         getPoiInfos (
           opts: {
-          curPage: ${typeof query.page !== "undefined" ? query.page : 1},
-          perPage: ${typeof query.limit !== "undefined" ? query.limit : 30},
-          q: "${typeof query.q !== "undefined" ? query.q : ""}",
-          sort: "${typeof query.sort !== "undefined" ? query.sort : "-id"}"
-        }
+            curPage: ${typeof query.page !== "undefined" ? query.page : 1},
+            perPage: ${typeof query.limit !== "undefined" ? query.limit : 30},
+            q: "${typeof query.q !== "undefined" ? query.q : ""}",
+            sort: "${typeof query.sort !== "undefined" ? query.sort : "-id"}",
+            poitype: "${typeof query.poitype !== "undefined" ? query.poitype : ""}"
+          }
         ) {
           items {
             type { id, name },

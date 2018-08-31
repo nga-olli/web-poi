@@ -1,34 +1,16 @@
 <template>
   <el-row class="main-content page-info">
     <header-top></header-top>
-    <el-col :span="24">
-      <div class="header-right" style="text-align: right;">
-        <div class="el-search el-col-5">
-          <div class="panelbody-box-search">
-            <el-input size="small" placeholder="Search"
-              v-model="form.q"
-              @keyup.enter.native="onSearch"
-              clearable
-              @clear="onReset()">
-              <template slot="prepend" @click="onSearch"><i class="el-icon-search"></i></template>
-            </el-input>
-          </div>
-
-          <!-- <div class="panelbody-box-search">
-            <el-autocomplete size="small" placeholder="Search..." :fetch-suggestions="onSearch" @select="onSearchChoose" :trigger-on-focus="false">
-               <template slot="prepend"><i class="el-icon-search"></i></template>
-               <template slot-scope="{ item }">
-                <div class="value">{{ item.id }}</div>
-                <span class="link">{{ item.name }}</span>
-              </template>
-            </el-autocomplete>
-          </div> -->
-        </div>
+    <el-row>
+      <el-col :md="12" class="left-head">
+        <filter-bar></filter-bar>
+      </el-col>
+      <el-col :md="12" class="right-head">
         <import-button></import-button>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>
-      </div>
-    </el-col>
-    <el-col :span="24">
+      </el-col>
+    </el-row>
+    <el-col :md="24">
       <div class="panel-body">
         <info-items :infos="infos"></info-items>
       </div>
@@ -46,6 +28,7 @@ import Pagination from '~/components/pagination.vue';
 import InfoItems from '~/components/info/items.vue';
 import ImportButton from '~/components/info/import.vue';
 import HeaderTop from '~/components/headertop.vue';
+import FilterBar from '~/components/info/filter.vue';
 const querystring = require('querystring');
 
 @Component({
@@ -55,7 +38,8 @@ const querystring = require('querystring');
     HeaderTop,
     Pagination,
     InfoItems,
-    ImportButton
+    ImportButton,
+    FilterBar
   }
 })
 export default class PoiInfoPage extends Vue {
@@ -69,14 +53,6 @@ export default class PoiInfoPage extends Vue {
   @State(state => state.infos.query) query;
   @Watch('$route')
   onPageChange() { this.initData() }
-
-  form: object = {};
-
-  async onSearch() {
-    this.query.page = 1;
-    const pageUrl = `?${querystring.stringify(this.form)}&${querystring.stringify(this.query)}`;
-    return this.$router.push(pageUrl);
-  }
 
   onReset() { return this.$router.push('/info'); }
 
@@ -101,14 +77,23 @@ export default class PoiInfoPage extends Vue {
       limit: 300
     } })
     await this.getTreesAction();
-    this.form = {
-      q: this.$route.query.q || ''
-    };
   }
 }
 </script>
 
 <style lang="scss">
+// change some style
+.left-head {
+  padding-left: 5px;
+  .panelbody-box-search {
+    width: 280px !important;
+  }
+}
+.right-head {
+  text-align: right;
+  padding-right: 5px !important;
+}
+
 
 .page-info {
   .el-select-dropdown__wrap {
