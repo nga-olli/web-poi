@@ -22,7 +22,7 @@ export const mutations = {
     state.query.page = response.meta.curPage || 1;
   },
   ADD_DATA(state, response) {
-    state.data.push(response);
+    state.data.unshift(response);
   },
   UPDATE_DATA(state, response) {
     const index = state.data.findIndex(item => item.id === response.id);
