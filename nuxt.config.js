@@ -49,7 +49,7 @@ module.exports = {
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }
     ]
   },
-  loading: { color: "#2ecc71", height: "7px" },
+  loading: { color: "#2ecc71", height: "3px" },
   build: {
     analyze: false,
     vendor: [
