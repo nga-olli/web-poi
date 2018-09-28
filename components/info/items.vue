@@ -47,7 +47,7 @@
         <template slot-scope="scope">
           <small v-if="scope.row.street.length > 0">{{ scope.row.street }}</small>
           <div v-else>
-            <i class="el-icon-fa-times-circle text-danger"></i>
+            <i class="el-icon-fa-times text-danger"></i>
           </div>
         </template>
       </el-table-column>
