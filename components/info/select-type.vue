@@ -8,7 +8,7 @@
         :value="item.id"
       >
         <span class="type-name">{{ item.name }}</span>
-        <span class="type-similar">{{ _truncate(item.similar.join(', ')) }}</span>
+        <span class="type-similar" v-if="item.similar !== null">{{ _truncate(item.similar.join(', ')) }}</span>
       </el-option>
     </el-select>
   </div>

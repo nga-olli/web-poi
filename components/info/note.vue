@@ -2,7 +2,7 @@
   <el-popover
     :key="id"
     placement="left-start"
-    trigger="manual"
+    trigger="click"
     v-model="visible"
     width="500">
     <el-row>
@@ -49,7 +49,7 @@
 
     <el-button
       slot="reference" @click="onShow()"
-      icon="el-icon-fa-book"
+      :icon="!visible ? 'el-icon-fa-book' : 'el-icon-fa-times'"
       circle
       size="mini"
       :type="hasNote ? 'warning' : ''"

@@ -13,16 +13,6 @@
               <template slot="prepend" @click="onSearch"><i class="el-icon-search"></i></template>
             </el-input>
           </div>
-
-          <!-- <div class="panelbody-box-search">
-            <el-autocomplete size="small" placeholder="Search..." :fetch-suggestions="onSearch" @select="onSearchChoose" :trigger-on-focus="false">
-               <template slot="prepend"><i class="el-icon-search"></i></template>
-               <template slot-scope="{ item }">
-                <div class="value">{{ item.id }}</div>
-                <span class="link">{{ item.name }}</span>
-              </template>
-            </el-autocomplete>
-          </div> -->
         </div>
         <add-form></add-form>
         <pagination :totalItems="totalItems" :currentPage="query.page" :recordPerPage="recordPerPage"></pagination>

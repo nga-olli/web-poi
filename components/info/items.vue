@@ -39,7 +39,7 @@
         <template slot-scope="scope">
           <small v-if="scope.row.number.length > 0">{{ scope.row.number }}</small>
           <div v-else>
-            <i class="el-icon-fa-times-circle text-danger"></i>
+            <i class="el-icon-fa-times text-danger"></i>
           </div>
         </template>
       </el-table-column>
@@ -47,7 +47,7 @@
         <template slot-scope="scope">
           <small v-if="scope.row.street.length > 0">{{ scope.row.street }}</small>
           <div v-else>
-            <i class="el-icon-fa-times-circle text-danger"></i>
+            <i class="el-icon-fa-times text-danger"></i>
           </div>
         </template>
       </el-table-column>
@@ -56,7 +56,7 @@
           <template slot-scope="scope">
             <small v-if="scope.row.ward !== null">{{ scope.row.ward.name }}</small>
             <div v-else>
-              <i class="el-icon-fa-times-circle text-danger"></i>
+              <i class="el-icon-fa-times text-danger"></i>
             </div>
           </template>
         </el-table-column>
@@ -64,7 +64,7 @@
           <template slot-scope="scope">
             <small v-if="scope.row.district !== null">{{ scope.row.district.name }}</small>
             <div v-else>
-              <i class="el-icon-fa-times-circle text-danger"></i>
+              <i class="el-icon-fa-times text-danger"></i>
             </div>
           </template>
         </el-table-column>
@@ -72,7 +72,7 @@
           <template slot-scope="scope">
             <small v-if="scope.row.city !== null">{{ scope.row.city.name }}</small>
             <div v-else>
-              <i class="el-icon-fa-times-circle text-danger"></i>
+              <i class="el-icon-fa-times text-danger"></i>
             </div>
           </template>
         </el-table-column>

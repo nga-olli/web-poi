@@ -25,7 +25,7 @@ import { Action, State } from 'vuex-class';
   notifications: {
     importSuccess: {
       icon: 'fas fa-check',
-      position: 'bottomCenter',
+      position: 'bottomLeft',
       title: 'Upload success',
       toastOnce: true,
       type: 'success'

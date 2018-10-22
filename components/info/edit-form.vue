@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" size="mini" icon="el-icon-edit" @click="onShow()"  circle></el-button>
+    <el-button type="primary" size="mini" icon="el-icon-edit" @click="visible = true"  circle></el-button>
     <el-dialog
       ref="dialog"
       :visible.sync="visible"
@@ -62,7 +62,7 @@
               </el-col>
             </el-row>
 
-            <el-form-item prop="status" label="City / District / Ward">
+            <el-form-item label="City / District / Ward">
               <el-cascader
                 placeholder="Try searching: Hà Nội, Quận 1, Thị xã Rạch Giá, Phường Đông Hồ, ..."
                 :options="regions"
@@ -92,16 +92,16 @@ import { Action, State } from "vuex-class";
 @Component({
   notifications: {
     updateError: {
-      icon: "fas fa-exclamation-triangle",
-      position: "topRight",
-      title: "Update",
+      icon: 'fas fa-exclamation-triangle',
+      position: 'bottomLeft',
+      title: 'Update',
       toastOnce: true,
       type: "error"
     },
     updateSuccess: {
-      icon: "fas fa-check",
-      position: "topRight",
-      title: "Update",
+      icon: 'fas fa-check',
+      position: 'bottomLeft',
+      title: 'Update',
       toastOnce: true,
       type: "success"
     }
@@ -177,10 +177,6 @@ export default class EditForm extends Vue {
     this.mapMode = "place";
     this.form = {};
     this.visible = false;
-  }
-
-  onShow() {
-    this.visible = true;
   }
 
   async onSubmit() {

@@ -24,7 +24,7 @@ import { Vue, Component, Prop } from "nuxt-property-decorator";
   notifications: {
     deleteSuccess: {
       icon: 'fas fa-exclamation-triangle',
-      position: 'bottomCenter',
+      position: 'bottomLeft',
       title: 'Delete',
       toastOnce: true,
       type: 'success'

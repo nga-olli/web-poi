@@ -72,10 +72,14 @@ module.exports = {
       }
     ]
   },
+<<<<<<< HEAD
   loading: {
     color: "#2ecc71",
     height: "7px"
   },
+=======
+  loading: { color: "#2ecc71", height: "3px" },
+>>>>>>> master
   build: {
     analyze: false,
     vendor: [
