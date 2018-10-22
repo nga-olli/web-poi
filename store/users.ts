@@ -50,20 +50,15 @@ export const actions = {
   },
 
   async login_by_username({ commit }, formData) {
-    const response = await this.$axios.$post("/", {
-      query: `{
-        login (
-          input: {
-            userName: "${formData.email}",
-            password: "${formData.password}"
-          }
-        ) {
-          user,
-          token
-        }
-      }`
-    });
+    const response = await this.$axios
+      .$post("/user/login/", {
+        email: formData.email,
+        password: formData.password
+      })
+      .then(res => setToken(res.data.access_token));
 
-    return typeof response.errors === "undefined" ? setToken(response.data.login.token) : response.errors;
+    console.log(response);
+    //return typeof response.errors === "undefined" ? setToken(response.data.login.token) : response.errors;
   }
+
 };

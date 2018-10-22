@@ -50,17 +50,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Provide } from 'nuxt-property-decorator';
-import { Action } from 'vuex-class';
+import { Vue, Component, Provide } from "nuxt-property-decorator";
+import { Action } from "vuex-class";
 
 @Component({
   notifications: {
     loginError: {
-      icon: 'fas fa-exclamation-triangle',
-      position: 'bottomCenter',
-      title: 'Login failed',
+      icon: "fas fa-exclamation-triangle",
+      position: "bottomCenter",
+      title: "Login failed",
       toastOnce: true,
-      type: 'error'
+      type: "error"
     }
   }
 })
@@ -72,21 +72,22 @@ export default class AdminLoginPage extends Vue {
   };
 
   $refs: {
-    loginForm: HTMLFormElement
-  }
+    loginForm: HTMLFormElement;
+  };
 
   loginError: ({ message: string }) => void;
 
-  @Action('users/login_by_username') loginAction;
+  @Action("users/login_by_username")
+  loginAction;
 
   head() {
     return {
-      title: 'POI',
+      title: "POI",
       meta: [
         {
-          hid: 'description',
-          name: 'description',
-          content: 'POI'
+          hid: "description",
+          name: "description",
+          content: "POI"
         }
       ]
     };
@@ -99,16 +100,16 @@ export default class AdminLoginPage extends Vue {
         const errors = await this.loginAction(this.loginForm);
         this.loading = false;
 
-        if (typeof errors !== 'undefined') {
+        if (typeof errors !== "undefined") {
           errors.map(err => {
-            this.loginError({message: err.message});
-          })
+            this.loginError({ message: err.message });
+          });
           return;
         }
 
-        let redirectUrl = '/';
-        if (typeof this.$route.query.redirect !== 'undefined') {
-          redirectUrl = Buffer.from(this.$route.query.redirect, 'base64').toString('ascii');
+        let redirectUrl = "/";
+        if (typeof this.$route.query.redirect !== "undefined") {
+          redirectUrl = Buffer.from(this.$route.query.redirect, "base64").toString("ascii");
         }
 
         return this.$router.push({
@@ -117,17 +118,18 @@ export default class AdminLoginPage extends Vue {
       } else {
         return false;
       }
-    })
+    });
   }
 }
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/_reset';
-@import '../../assets/scss/_vars';
-@import '../../assets/scss/_mixins';
+@import "../../assets/scss/_reset";
+@import "../../assets/scss/_vars";
+@import "../../assets/scss/_mixins";
 
-html, body {
+html,
+body {
   font-family: $base-font-family;
 
   .login-container {
@@ -160,9 +162,9 @@ html, body {
           max-height: 100%;
 
           .brand-text {
-            font-size: 18px!important;
+            font-size: 18px !important;
             font-weight: 400;
-            text-shadow: rgba(0,0,0,.15) 0 0 1px;
+            text-shadow: rgba(0, 0, 0, 0.15) 0 0 1px;
           }
           .login-form {
             margin: 45px 0 30px;

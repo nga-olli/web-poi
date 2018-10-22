@@ -37,19 +37,45 @@ module.exports = {
   },
   head: {
     titleTemplate: "%s - POI",
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "POI" },
-      { name: "msapplication-config" }
+    meta: [{
+        charset: "utf-8"
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1"
+      },
+      {
+        hid: "description",
+        name: "description",
+        content: "POI"
+      },
+      {
+        name: "msapplication-config"
+      }
     ],
-    link: [
-      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
-      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
-      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" }
+    link: [{
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png"
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png"
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png"
+      }
     ]
   },
-  loading: { color: "#2ecc71", height: "7px" },
+  loading: {
+    color: "#2ecc71",
+    height: "7px"
+  },
   build: {
     analyze: false,
     vendor: [
@@ -67,20 +93,34 @@ module.exports = {
       }
     }
   },
-  modules: ["@nuxtjs/axios", ["@nuxtjs/browserconfig", { TileColor: "#3f51b5" }], "~/modules/typescript.js"],
-  plugins: [
-    { src: "~plugins/elementui.ts" },
-    { src: "~plugins/fetch.ts" },
-    { src: "~plugins/scrolltop.ts" },
-    { src: "~plugins/notifications.ts" },
-    { src: "~plugins/tags-input.ts" },
-    { src: "~plugins/clipboard.ts" }
+  modules: ["@nuxtjs/axios", ["@nuxtjs/browserconfig", {
+    TileColor: "#3f51b5"
+  }], "~/modules/typescript.js"],
+  plugins: [{
+      src: "~plugins/elementui.ts"
+    },
+    {
+      src: "~plugins/fetch.ts"
+    },
+    {
+      src: "~plugins/scrolltop.ts"
+    },
+    {
+      src: "~plugins/notifications.ts"
+    },
+    {
+      src: "~plugins/tags-input.ts"
+    },
+    {
+      src: "~plugins/clipboard.ts"
+    }
   ],
   axios: {
-    baseURL: process.env.GRAPHQL_ENDPOINT,
+    baseURL: 'http://35.240.143.235',
     timeout: 30,
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6ImFkbWluQGxvY2FsaG9zdC5sb2NhbCIsIm5iZiI6MTUzOTkzMzc3OCwiaWF0IjoxNTM5OTMzNzc4LCJqdGkiOiIzZmYxYzRkNy1hMzdiLTQ2ZmEtODg5Zi03MDQ5MmNiMTMyOGYiLCJ0eXBlIjoiYWNjZXNzIiwiZnJlc2giOmZhbHNlfQ.9E3lGYWjU_Rd4EySnu_VIGHw_ur2IRMiPQho1J1Kiak"
     }
   }
 };

@@ -2,6 +2,7 @@ import jwtDecode from "jwt-decode";
 import Cookie from "js-cookie";
 
 export const setToken = token => {
+
   window.localStorage.setItem("token", token);
   window.localStorage.setItem("user", JSON.stringify(jwtDecode(token)));
   Cookie.set("jwt", token, { expires: 365 });

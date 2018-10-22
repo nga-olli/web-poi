@@ -14,12 +14,17 @@ export const mutations = {
   LOAD_FAIL(state) {
     state.loading = false;
   },
-  SET_DATA(state, response) {
+  SET_DATA(state, responseData) {
     state.loading = false;
-    state.data = response.items || null;
-    state.totalItems = response.meta.totalResults || 0;
-    state.recordPerPage = response.meta.perPage || 20;
-    state.query.page = response.meta.curPage || 1;
+    state.data = responseData || null;
+    state.totalItems =
+      typeof responseData.meta !== 'undefined'
+        ? responseData.meta.totalItems
+        : 0
+    state.recordPerPage =
+      typeof responseData.meta !== 'undefined'
+        ? responseData.meta.recordPerPage
+        : 0
   },
   UPDATE_DATA(state, response) {
     const index = state.data.findIndex(item => item.id === response.id);
@@ -34,42 +39,26 @@ export const mutations = {
 };
 
 export const actions = {
-  async get_all({ commit }, { query }) {
-    commit("LOAD_PENDING");
+  async get_all({ commit }, { jwt, query }) {
+    //commit("LOAD_PENDING");
 
-    const response = await this.$axios.$post("/", {
-      query: `{
-        getPoiTypes (
-          opts: {
-            curPage: ${typeof query.page !== "undefined" ? query.page : 1},
-            perPage: ${typeof query.limit !== "undefined" ? query.limit : 20},
-            q: "${typeof query.q !== "undefined" ? query.q : ""}",
-            sort: "${typeof query.sort !== "undefined" ? query.sort : "-id"}"
-          }
-        ) {
-          items {
-            id,
-            name,
-            similar,
-            ggSimilar,
-            dateCreated
-          },
-          meta {
-            curPage,
-            perPage,
-            totalPages,
-            totalResults
-          }
-        }
-      }`
+    const response = await this.$axios.$get("/poi_type/", {
+      data: query,
+      headers: {
+        Authorization: 'Bearer' + jwt
+      }
+    })
+    .then(res => {
+      commit('SET_DATA', res.data)
+
     });
-
-    if (typeof response.errors === "undefined") {
-      return commit("SET_DATA", response.data.getPoiTypes);
-    } else {
-      commit('LOAD_FAIL');
-      return response.errors;
-    }
+    console.log(response);
+    // if (typeof response.errors === "undefined") {
+    //   return commit("SET_DATA", response.data);
+    // } else {
+    //   commit('LOAD_FAIL');
+    //   return response.errors;
+    // }
   },
 
   async suggest({ commit }, { keyword }) {
